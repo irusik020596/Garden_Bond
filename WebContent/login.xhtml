@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>login</title>
+	<meta name="viewport" content="width=device-width" />
+	<link rel="stylesheet" type="text/css" href="css/all-dist.css" />
+</h:head>
+<h:body>
+	<div class="wrapper wrapper--login">
+		<header class="header">
+			<div class="container">
+				<div class="logo">
+					<img src="images/logo.png" alt="logo" />
+				</div>
+			</div>
+		</header>
+		<main class="main">
+			<div class="container">
+	<h:form id="loginform" class="form form--login">
+					<div class="form__group">
+		<h3>Login</h3>
+		</div>
+					<div class="form__group">
+						<label for="username">Username*</label>
+		<h:inputText id="username" value="#{login.user}" class="form__control" ></h:inputText>
+		<p><h:message id="username_m" for="username"></h:message></p>
+		</div>
+					<div class="form__group">
+						<label for="password">Password*</label>
+		<h:inputSecret id="password" value="#{login.pwd}" class="form__control"></h:inputSecret>
+		<p><h:message id="password_m" for="password"></h:message></p>
+		</div>		
+					<div class="form__group">
+		<h:commandButton action="#{login.validateUsernamePassword}"
+			value="Login" update="@(.ui-message)" class="form__control btn btn--primary"></h:commandButton>
+ 		</div>			
+<!-- 					<div class="form__group"> -->
+		<h:commandButton action="#{login.onRegistration}"
+			value="Registration" class="form__control btn btn--primary"></h:commandButton>
+<!-- 		</div> -->
+	</h:form>
+			</div>
+		</main>
+	</div>
+	<footer class="footer">
+		<div class="container">
+			<div class="copyright">
+				<span class="copyright__text">Talamash</span>
+				<span class="copyright__text">Kharkiv 2015 (c)</span>
+			</div>
+			<div class="social">
+				<span class="social__text">Следите за нами в социальных сетях:</span>
+				<a href="#" class="social__link"><span class="icon-vk"></span></a>
+				<a href="#" class="social__link"><span class="icon-facebook"></span></a>
+				<a href="#" class="social__link"><span class="icon-twitter"></span></a>
+				<a href="#" class="social__link"><span class="icon-youtube"></span></a>
+				<a href="#" class="social__link"><span class="icon-linkedin"></span></a>
+			</div>
+		</div>
+	</footer>
+</h:body>
+</html>

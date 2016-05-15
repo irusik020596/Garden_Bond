@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    <h:head>
+        <title>List of rules</title>
+	<meta name="viewport" content="width=device-width" />
+	<link rel="stylesheet" type="text/css" href="css/all-dist.css" />
+    </h:head>
+    <h:body>
+	<div class="wrapper wrapper--base">
+		<div class="header">
+			<div class="container">
+				<h1>#{sensors.lotName}</h1>
+			</div>
+		</div>
+		<div class="main">
+			<div class="container">
+			    <h:form>
+				<div class="menu">
+					<input type="checkbox" id="hmt" class="menu__hidden-ticker"/>
+					<label class="menu__btn" for="hmt">
+					  <span class="first"></span>
+					  <span class="second"></span>
+					  <span class="third"></span>
+					</label>
+					<div class="logo--small">
+					  	<img src="images/logo2.png" alt=""/>
+					</div>
+					<ul class="menu__hidden">
+						<li class="menu__title">menu</li>
+						<li><img src="images/logout.png" alt="" class="menu__icon"/><h:commandLink action="#{login.logout}" value="Logout"></h:commandLink></li>
+						<li><img src="images/plot.png" alt="" class="menu__icon"/><h:commandLink action="#{lots.lots}" value="Plots"></h:commandLink></li>
+						<li><img src="images/sensor.png" alt="" class="menu__icon"/><h:commandLink action="#{lots.sensors}" value="Sensors"></h:commandLink></li>
+						<li><img src="images/robot.png" alt="" class="menu__icon"/><h:commandLink action="#{lots.robots}" value="Robots"></h:commandLink></li>
+					</ul>
+				</div>
+			    </h:form>
+				<div class="edition">
+					<div class="left">
+        <h3 class="heading heading--primary heading--center">List rules</h3>
+        <h:form rendered="#{not empty rules.list}">
+            <h:dataTable value="#{rules.list}" var="rule">
+                <h:column><f:facet name="header">Name</f:facet>#{rule.name}</h:column>
+                <h:column><f:facet name="header">Description</f:facet>#{rule.description}</h:column>
+                <h:column><f:facet name="header">SMSnote</f:facet>#{rule.smsnoteText}</h:column>
+                <h:column><f:facet name="header">EMAILnote</f:facet>#{rule.emailnoteText}</h:column>
+                <h:column><f:facet name="header">Type</f:facet>#{rule.typeText}</h:column>
+                <h:column><h:commandButton class="btn btn--empty" value="edit" action="#{rules.edit(rule)}" image="images/Pencil-icon.png" /></h:column>
+                <h:column><h:commandButton class="btn btn--empty" value="delete" action="#{rules.delete(rule)}" image="images/cross.png" /></h:column>
+                <h:column><h:commandButton class="btn btn--empty" value="new problem" action="#{rules.newproblem(rule)}" image="images/icon_more_action.png" /></h:column>
+            </h:dataTable>
+        </h:form>
+        <h:panelGroup rendered="#{empty rules.list}">
+            <p>Table is empty! Please add new rules.</p>
+        </h:panelGroup>
+
+    	    <h:form rendered="#{not empty rules.conditionlist}">
+		        <h4 class="heading heading--primary heading--center">List Conditions</h4>
+        	    <h:dataTable value="#{rules.conditionlist}" var="condition">
+            	     <h:column><f:facet name="header">Sensor Name</f:facet>#{rules.getSensorName(condition.sensorId)}</h:column>
+                	<h:column><f:facet name="header">Operation</f:facet>#{condition.operationText}</h:column>
+	                <h:column><f:facet name="header">Limit</f:facet>#{condition.limit}</h:column>
+                	<h:column><h:commandButton class="btn btn--empty" value="edit" action="#{rules.editCond(condition)}" image="images/Pencil-icon.png" /></h:column>
+               		<h:column><h:commandButton class="btn btn--empty" value="delete" action="#{rules.deleteCond(condition)}" image="images/cross.png" /></h:column>
+            	</h:dataTable>
+        	</h:form>
+<!--         	<h:panelGroup rendered="#{empty rules.conditionlist}">
+            	<p>Table is empty! Please add new condition.</p>
+        	</h:panelGroup> -->
+	        <h:panelGroup rendered="#{rules.addcond}">
+            	<h4 class="heading heading--primary heading--center">Add condition</h4>
+            	<h:form class="form form--adding">
+                	<p class="form__group">
+						<label for="sensor">Sensor:</label>
+		                <h:selectOneListbox id="sensor" value="#{rules.condition.sensorId}" class="form__control">
+				   			<f:selectItems value="#{rules.condValue}" />
+   						</h:selectOneListbox></p>
+                	<p class="form__group">
+						<label for="operation">Operation:</label>
+		                <h:selectOneListbox id="operation" value="#{rules.condition.operation}" class="form__control">
+				   			<f:selectItems value="#{rules.operationValue}" />
+   						</h:selectOneListbox></p>
+                	<p class="form__group">
+						<label for="limit">Limit:</label>
+                	<h:inputText id="limit" value="#{rules.condition.limit}" class="form__control" /></p>
+	                <p class="form__group"><h:commandButton value="add" action="#{rules.addcond}" class="btn btn--primary" /></p>
+            	</h:form>
+        	</h:panelGroup>
+	        <h:panelGroup rendered="#{rules.editcond}">
+            	<h4 class="heading heading--primary heading--center">Edit condition</h4>
+            	<h:form class="form form--adding">
+                	<p class="form__group">
+						<label for="sensor">Sensor:</label>
+		                <h:selectOneListbox id="sensor" value="#{rules.condition.sensorId}" class="form__control">
+				   			<f:selectItems value="#{rules.condValue}" />
+   						</h:selectOneListbox></p>
+                	<p class="form__group">
+						<label for="operation">Operation:</label>
+		                <h:selectOneListbox id="operation" value="#{rules.condition.operation}" class="form__control">
+				   			<f:selectItems value="#{rules.operationValue}" />
+   						</h:selectOneListbox></p>
+                	<p class="form__group">
+						<label for="limit">Limit:</label>
+                	<h:inputText id="limit" value="#{rules.condition.limit}" class="form__control" /></p>
+	                <p class="form__group"><h:commandButton value="save" action="#{rules.saveCond}" class="btn btn--primary" /></p>
+            	</h:form>
+        	</h:panelGroup>
+
+					</div>
+					<div class="right">
+        <h:panelGroup rendered="#{!rules.edit}">
+            <h3 class="heading heading--primary heading--center">Add rule</h3>
+            <h:form class="form form--adding">
+                <p class="form__group">
+						<label for="name">Name:</label>
+                <h:inputText id="name" value="#{rules.rule.name}" class="form__control" /></p>
+                <p class="form__group">
+						<label for="description">Description:</label>
+                <h:inputText id="description" value="#{rules.rule.description}" class="form__control" /></p>
+                <p class="form__group">
+						<label for="smsnote">SMSnote:</label>
+		                <h:selectOneListbox id="smsnote" value="#{rules.rule.smsnote}" class="form__control">
+				   			<f:selectItems value="#{rules.smsTypeValue}" />
+   						</h:selectOneListbox></p>
+                 
+                <p class="form__group">
+						<label for="emailnote">EMAILnote:</label>
+		                <h:selectOneListbox id="emailnote" value="#{rules.rule.emailnote}" class="form__control">
+				   			<f:selectItems value="#{rules.emailTypeValue}" />
+   						</h:selectOneListbox></p>
+                
+                <p class="form__group">
+						<label for="type">Type:</label>
+		                <h:selectOneListbox id="type" value="#{rules.rule.type}" class="form__control">
+				   			<f:selectItems value="#{rules.ruleTypeValue}" />
+   						</h:selectOneListbox></p>
+                <p class="form__group"><h:commandButton value="add" action="#{rules.add}" class="btn btn--primary" /></p>
+            </h:form>
+        </h:panelGroup>
+        <h:panelGroup rendered="#{rules.edit}">
+            <h3 class="heading heading--primary heading--center">Edit #{rules.rule.name}</h3>
+            <h:form class="form form--adding">
+                <p class="form__group">
+						<label for="name">Name:</label>
+                <h:inputText id="name" value="#{rules.rule.name}" class="form__control" /></p>
+                <p class="form__group">
+						<label for="description">Description:</label>
+                <h:inputText id="description" value="#{rules.rule.description}" class="form__control" /></p>
+                <p class="form__group">
+						<label for="smsnote">SMSnote:</label>
+		                <h:selectOneListbox id="smsnote" value="#{rules.rule.smsnote}" class="form__control">
+				   			<f:selectItems value="#{rules.smsTypeValue}" />
+   						</h:selectOneListbox></p>
+                <p class="form__group">
+						<label for="emailnote">EMAILnote:</label>
+		                <h:selectOneListbox id="emailnote" value="#{rules.rule.emailnote}" class="form__control">
+				   			<f:selectItems value="#{rules.emailTypeValue}" />
+   						</h:selectOneListbox></p>
+                <p class="form__group">
+						<label for="type">Type:</label>
+		                <h:selectOneListbox id="type" value="#{rules.rule.type}" class="form__control">
+				   			<f:selectItems value="#{rules.ruleTypeValue}" />
+   						</h:selectOneListbox></p>
+                <p class="form__group"><h:commandButton value="save" action="#{rules.save}" class="btn btn--primary" /></p>
+            </h:form>
+        </h:panelGroup>    
+        <h:panelGroup>
+        </h:panelGroup>
+</div>        
+</div>
+</div>
+		</div>
+	</div>
+	<div class="footer">
+			<div class="copyright">
+				<span class="copyright__text">Talamash Kharkiv 2015 (c)</span>
+			</div>
+			<div class="social">
+				<span class="social__text">Следите за нами в социальных сетях:</span>
+				<a href="#" class="social__link"><span class="icon-vk"></span></a>
+				<a href="#" class="social__link"><span class="icon-facebook"></span></a>
+				<a href="#" class="social__link"><span class="icon-twitter"></span></a>
+				<a href="#" class="social__link"><span class="icon-youtube"></span></a>
+				<a href="#" class="social__link"><span class="icon-linkedin"></span></a>
+			</div>
+	</div>
+    </h:body>
+</html>
