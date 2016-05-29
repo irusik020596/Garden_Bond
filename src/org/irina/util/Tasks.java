@@ -10,7 +10,7 @@ import org.irina.dao.TasksDAO;
 public class Tasks implements Runnable
 {
     @Override public void run() {
-      ++fCount;
+      /*++fCount;
       Date date = new Date();   // given date
       Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
       calendar.setTime(date);   // assigns calendar to given date 
@@ -22,9 +22,9 @@ public class Tasks implements Runnable
       if(m == 0)
       {
     	  task1(h);
-      }
+      }*/
     }
-    private static void task1(int h)
+    /*private static void task1(int h)
     {
     	List<String> lotsIds = TasksDAO.getLots(h);
     	if(lotsIds == null)
@@ -44,7 +44,6 @@ public class Tasks implements Runnable
 // save values
 // are problems ? - clean problems + deactivate robots |+ create problems + activate robots
     	}
-    }
     
-    private int fCount;
+    /*private int fCount;*/
 }

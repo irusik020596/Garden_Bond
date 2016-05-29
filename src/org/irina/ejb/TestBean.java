@@ -8,8 +8,8 @@ public class TestBean {
   {
 //	Context context = EJBContainer.createEJBContainer().getContext();
 //	 Friend red = (Friend) context.lookup("java:global/plants/RedBean");
-		 Friend red = (Friend)  new InitialContext().lookup("java:global/RedBean");
+		/* Friend red = (Friend)  new InitialContext().lookup("java:global/RedBean");
 	  System.out.println("red ay: " + red.sayHello());
-	System.out.println("friend say: " + red.helloFromFriend());
+	System.out.println("friend say: " + red.helloFromFriend());*/
   }
 }

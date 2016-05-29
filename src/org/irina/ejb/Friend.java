@@ -1,6 +1,6 @@
 package org.irina.ejb;
 
-//import javax.ejb.Local;
+/*import javax.ejb.Local;
 
 /**
  * This is an EJB 3 local business interface
@@ -10,12 +10,12 @@ package org.irina.ejb;
  * if the bean does not implement any other interfaces
  */
 //START SNIPPET: code
-//@Local
+/*@Local
 public interface Friend {
 
     public String sayHello();
 
     public String helloFromFriend();
 
-}
+}*/
 //END SNIPPET: code

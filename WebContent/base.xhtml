@@ -2,102 +2,170 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>List of active problems and lots</title>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>List of active problems and lots</title>
 	<meta name="viewport" content="width=device-width" />
 	<link rel="stylesheet" type="text/css" href="css/all-dist.css" />
-    </h:head>
-    <h:body>
+</h:head>
+<h:body>
 	<div class="wrapper wrapper--base">
 		<div class="header">
 			<div class="container">
-		<h1>Welcome #{login.user}</h1>
-			    <h:form>
-				<div class="menu">
-					<input type="checkbox" id="hmt" class="menu__hidden-ticker"/>
-					<label class="menu__btn" for="hmt">
-					  <span class="first"></span>
-					  <span class="second"></span>
-					  <span class="third"></span>
-					</label>
-					<div class="logo--small">
-					  	<img src="images/logo2.png" alt=""/>
+				<h1>Welcome #{login.user}</h1>
+				<h:form>
+					<div class="menu">
+						<input type="checkbox" id="hmt" class="menu__hidden-ticker" /> <label
+							class="menu__btn" for="hmt"> <span class="first"></span>
+							<span class="second"></span> <span class="third"></span>
+						</label>
+						<div class="logo--small">
+							<img src="images/logo2.png" alt="" />
+						</div>
+						<ul class="menu__hidden">
+							<li class="menu__title">menu</li>
+							<li><img src="images/logout.png" alt="" class="menu__icon" />
+								<h:commandLink action="#{login.logout}" value="Logout"></h:commandLink></li>
+						</ul>
 					</div>
-					<ul class="menu__hidden">
-						<li class="menu__title">menu</li>
-						<li><img src="images/logout.png" alt="" class="menu__icon"/><h:commandLink action="#{login.logout}" value="Logout"></h:commandLink></li>
-					</ul>
-				</div>
-			    </h:form>
+				</h:form>
 			</div>
 		</div>
 		<div class="main">
 			<div class="container">
-        <h3 class="heading heading--primary heading--center">List active problems</h3>
-        <h:form rendered="#{not empty lots.listProblems}">
-            <h:dataTable class="table" value="#{lots.listProblems}" var="problem">
-              <h:column><f:facet name="header">DateTime</f:facet>#{problem.attime}</h:column> 
-              <h:column><f:facet name="header">Lot</f:facet>#{problem.lot}</h:column> 
-              <h:column><f:facet name="header">Rule</f:facet>#{problem.rule}</h:column> 
-              <h:column><f:facet name="header">Causes</f:facet>#{problem.notes}</h:column> 
-                <h:column><h:commandButton class="btn btn--empty" value="checked" action="#{lots.checked(problem)}" image="images/Check-icon.png" /></h:column>
-            </h:dataTable>
-        </h:form>
-        <h:panelGroup rendered="#{empty lots.listProblems}">
-            <p>Active problems not exists.</p>
-        </h:panelGroup>
+				<h3 class="heading heading--primary heading--center">List
+					active problems</h3>
+				<h:form rendered="#{not empty lots.listProblems}">
+					<h:dataTable class="table" value="#{lots.listProblems}"
+						var="problem">
+						<h:column>
+							<f:facet name="header">DateTime</f:facet>#{problem.attime}</h:column>
+						<h:column>
+							<f:facet name="header">Lot</f:facet>#{problem.lot}</h:column>
+						<h:column>
+							<f:facet name="header">Rule</f:facet>#{problem.rule}</h:column>
+						<h:column>
+							<f:facet name="header">Causes</f:facet>#{problem.notes}</h:column>
+						<h:column>
+							<h:commandButton class="btn btn--empty" value="checked"
+								action="#{lots.checked(problem)}" image="images/Check-icon.png" />
+						</h:column>
+					</h:dataTable>
+				</h:form>
+				<h:panelGroup rendered="#{empty lots.listProblems}">
+					<p>Active problems not exists.</p>
+				</h:panelGroup>
 				<div class="edition">
 					<div class="left">
-        <h3 class="heading heading--primary">Plots:</h3>
-        <h:form rendered="#{not empty lots.list}">
-            <h:dataTable class="table" value="#{lots.list}" var="item">
-                <h:column><f:facet name="header">Description</f:facet><h:commandLink action="#{lots.gotolot(item)}">#{item.description}</h:commandLink></h:column>
-                <h:column><h:commandButton class="btn btn--empty" value="edit" action="#{lots.edit(item)}" image="images/Pencil-icon.png" /></h:column>
-                <h:column><h:commandButton class="btn btn--empty" value="delete" action="#{lots.delete(item)}" image="images/cross.png" /></h:column>
-            </h:dataTable>
-        </h:form>
-        <h:panelGroup rendered="#{empty lots.list}">
-            <p>Lots Table is empty! Please add new items.</p>
-        </h:panelGroup>
+						<h3 class="heading heading--primary">Plots:</h3>
+						<h:form rendered="#{not empty lots.list}">
+							<h:dataTable class="table" value="#{lots.list}" var="item">
+								<h:column>
+									<f:facet name="header">Description</f:facet>
+									<h:commandLink action="#{lots.gotolot(item)}">#{item.description}</h:commandLink>
+								</h:column>
+								<h:column>
+									<h:commandButton class="btn btn--empty" value="edit"
+										action="#{lots.editM(item)}" image="images/Pencil-icon.png" />
+								</h:column>
+								<h:column>
+									<h:commandButton class="btn btn--empty" value="delete"
+										action="#{lots.delete(item)}" image="images/cross.png" />
+								</h:column>
+							</h:dataTable>
+						</h:form>
+						<h:panelGroup rendered="#{empty lots.list}">
+							<p>Lots Table is empty! Please add new items.</p>
+						</h:panelGroup>
 					</div>
 					<div class="right">
-        <h:panelGroup rendered="#{!lots.edit}">
-            <h3 class="heading heading--primary">Add plot</h3>
-            <h:form class="form form--adding">
-                <p class="form__group">
-						<label for="description">Description:</label>
-                <h:inputText id="description" value="#{lots.item.description}" class="form__control" /></p>
-                <p><h:commandButton value="add" action="#{lots.add}" class="btn btn--primary" /></p>
-            </h:form>
-        </h:panelGroup>
-        <h:panelGroup rendered="#{lots.edit}">
-            <h3 class="heading heading--primary">Edit plot #{lots.item.description}</h3>
-            <h:form class="form form--adding">
-                <p  class="form__group">
-						<label for="description">Description:</label>
-                 <h:inputText value="#{lots.item.description}" class="form__control" /></p>
-                <p class="form__group"><h:commandButton value="save" action="#{lots.save}" class="btn btn--primary" /></p>
-            </h:form>
-        </h:panelGroup>
-</div>        
-</div>
-</div>
+						<h:panelGroup rendered="#{!lots.edit}">
+							<h3 class="heading heading--primary">Add plot</h3>
+							<h:form class="form form--adding">
+								<p class="form__group">
+									<label for="description">Description:</label>
+									<h:inputText id="description" value="#{lots.item.description}"
+										class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="domain">Domain:</label>
+									<h:inputText id="domain" value="#{lots.item.domain}"
+										class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="broker_url">Broker URL:</label>
+									<h:inputText id="broker_url" value="#{lots.item.broker_url}"
+										class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="broker_login">Broker login:</label>
+									<h:inputText id="broker_login"
+										value="#{lots.item.broker_login}" class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="broker_password">Broker password:</label>
+									<h:inputText id="broker_password"
+										value="#{lots.item.broker_password}" class="form__control" />
+								</p>
+								<p>
+									<h:commandButton value="add" action="#{lots.add}"
+										class="btn btn--primary" />
+								</p>
+							</h:form>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{lots.edit}">
+							<h3 class="heading heading--primary">Edit plot
+								#{lots.item.description}</h3>
+							<h:form class="form form--adding">
+								<p class="form__group">
+									<label for="description">Description:</label>
+									<h:inputText value="#{lots.item.description}"
+										class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="domain">Domain:</label>
+									<h:inputText id="domain" value="#{lots.item.domain}"
+										class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="broker_url">Broker URL:</label>
+									<h:inputText id="broker_url" value="#{lots.item.broker_url}"
+										class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="broker_login">Broker login:</label>
+									<h:inputText id="broker_login"
+										value="#{lots.item.broker_login}" class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="broker_password">Broker password:</label>
+									<h:inputText id="broker_password"
+										value="#{lots.item.broker_password}" class="form__control" />
+								</p>
+								<p class="form__group">
+									<h:commandButton value="save" action="#{lots.save}"
+										class="btn btn--primary" />
+								</p>
+							</h:form>
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="footer">
-			<div class="copyright">
-				<span class="copyright__text">Talamash Kharkiv 2015 (c)</span>
-			</div>
-			<div class="social">
-				<span class="social__text">Следите за нами в социальных сетях:</span>
-				<a href="#" class="social__link"><span class="icon-vk"></span></a>
-				<a href="#" class="social__link"><span class="icon-facebook"></span></a>
-				<a href="#" class="social__link"><span class="icon-twitter"></span></a>
-				<a href="#" class="social__link"><span class="icon-youtube"></span></a>
-				<a href="#" class="social__link"><span class="icon-linkedin"></span></a>
-			</div>
+		<div class="copyright">
+			<span class="copyright__text">Talamash Kharkiv 2015 (c)</span>
+		</div>
+		<div class="social">
+			<span class="social__text">Следите за нами в социальных сетях:</span>
+			<a href="#" class="social__link"><span class="icon-vk"></span></a> <a
+				href="#" class="social__link"><span class="icon-facebook"></span></a>
+			<a href="#" class="social__link"><span class="icon-twitter"></span></a>
+			<a href="#" class="social__link"><span class="icon-youtube"></span></a>
+			<a href="#" class="social__link"><span class="icon-linkedin"></span></a>
+		</div>
 	</div>
-    </h:body>
+</h:body>
 </html>

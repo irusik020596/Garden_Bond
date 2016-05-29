@@ -11,26 +11,26 @@ public class Robot {
 	private String name;
 	private String description;
 	private String type;
-	private String host;
-	private String port;
+	private String subdomain;
+	//private String host;
+	//private String port;
 	private String status;
 	private String state;
 	//private String ruleId;
-	public Robot(String id, String name, String description, String type, String host, String port, String status, String state/*, String ruleId*/)
+	public Robot(String id, String name, String description, String type, String subdomain, String status, String state/*, String ruleId*/)
 	{
 		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.type = type;
-		this.host = host;
-		this.port = port;
+		this.subdomain = subdomain;
 		this.status = status;
 		this.state = state;
 	//	this.ruleId = ruleId;
 	}
 	public Robot()
 	{
-		this(null, null, null, null, null, null, null, null/*, null*/);
+		this(null, null, null, null, null, null, null/*, null*/);
 	}
 	@XmlElement(name="id", required=true)
 	public String getId()
@@ -68,7 +68,15 @@ public class Robot {
 	{
 		this.type = type;
 	}
-	@XmlElement(name="host", required=true)
+	@XmlElement(name = "subdomain", required = true)
+	public String getSubdomain() {
+		return subdomain;
+	}
+
+	public void setSubdomain(String subdomain) {
+		this.subdomain = subdomain;
+	}
+	/*@XmlElement(name="host", required=true)
 	public String getHost()
 	{
 		return host;
@@ -85,7 +93,7 @@ public class Robot {
 	public void setPort(String port)
 	{
 		this.port = port;
-	}
+	}*/
 	@XmlElement(name="status", required=true)
 	public String getStatus()
 	{

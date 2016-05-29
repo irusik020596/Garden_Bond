@@ -40,12 +40,11 @@ public class SensorService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("host") String host,
-			   		@DefaultValue("") @QueryParam("port") String port,
+			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status
 			   )
 	   {
-		   return RestDAO.addSensor(user, password, lotId, name, description, type, host, port, status);
+		   return RestDAO.addSensor(user, password, lotId, name, description, type, subdomain, status);
 	   }	
 	   @GET
 	   @Path("/edit")
@@ -57,12 +56,11 @@ public class SensorService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("host") String host,
-			   		@DefaultValue("") @QueryParam("port") String port,
+			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status
 			   )
 	   {
-		   return RestDAO.editSensor(user, password, id, name, description, type, host, port, status);
+		   return RestDAO.editSensor(user, password, id, name, description, type, subdomain, status);
 	   }	
 	   @GET
 	   @Path("/delete")
@@ -122,12 +120,11 @@ public class SensorService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("host") String host,
-			   		@DefaultValue("") @QueryParam("port") String port,
+			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status
 			   )
 	   {
-		   return RestDAO.addSensor(user, password, lotId, name, description, type, host, port, status);
+		   return RestDAO.addSensor(user, password, lotId, name, description, type, subdomain, status);
 	   }	
 	   @POST
 	   @Path("/edit")
@@ -139,12 +136,11 @@ public class SensorService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("host") String host,
-			   		@DefaultValue("") @QueryParam("port") String port,
+			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status
 			   )
 	   {
-		   return RestDAO.editSensor(user, password, id, name, description, type, host, port, status);
+		   return RestDAO.editSensor(user, password, id, name, description, type, subdomain, status);
 	   }	
 	   @POST
 	   @Path("/delete")

@@ -19,14 +19,14 @@ public class SensorDAO {
 
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select id, name, description, type, host, port, status from Sensors where lotId = ?");
+			ps = con.prepareStatement("Select id, name, description, type, sensorid, status from Sensors where lotId = ?");
 			ps.setString(1, lotId);
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String key1 = rs.getString(1);
 				String name = rs.getString(2);
-				Sensor s = new Sensor(key1, name, rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+				Sensor s = new Sensor(key1, name, rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
 				list.add(s);
 			}
 			if(rs != null) rs.close();
@@ -37,7 +37,7 @@ public class SensorDAO {
 		}
 		return list;
 	}
-	public static String addSensor(String lotId, String key, String name, String description, String type, String host, String port, String status)
+	public static String addSensor(String lotId, String key, String name, String description, String type, String sensorID, String status)
 	{
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -45,15 +45,14 @@ public class SensorDAO {
 		
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("insert into Sensors(lotId, id, name, description, type, host, port, status) values(?, ?, ?, ?, ?, ?, ?, ?)");
+			ps = con.prepareStatement("insert into Sensors(lotId, id, name, description, type, sensorid, status) values(?, ?, ?, ?, ?, ?, ?)");
 			ps.setString(1, lotId);
 			ps.setString(2, key);
 			ps.setString(3, name);
 			ps.setString(4, description);
 			ps.setString(5, type);
-			ps.setString(6, host);
-			ps.setString(7, port);
-			ps.setString(8, status);
+			ps.setString(6, sensorID);
+			ps.setString(7, status);
 			ok = ps.execute();
 			ok = true;
 			if(ps != null) ps.close();
@@ -67,21 +66,20 @@ public class SensorDAO {
 			return key;
 		return null;
 	}
-	public static String editSensor(String key, String name, String description, String type, String host, String port, String status)
+	public static String editSensor(String key, String name, String description, String type, String sensorID, String status)
 	{
 		Connection con = null;
 		PreparedStatement ps = null;
 		boolean ok = true;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("update Sensors set name = ?, description = ?, type = ?, host = ?, port = ?, status = ? where id = ?");
+			ps = con.prepareStatement("update Sensors set name = ?, description = ?, type = ?, sensorid = ?, status = ? where id = ?");
 			ps.setString(1, name);
 			ps.setString(2, description);
 			ps.setString(3, type);
-			ps.setString(4, host);
-			ps.setString(5, port);
-			ps.setString(6, status);
-			ps.setString(7, key);
+			ps.setString(4, sensorID);
+			ps.setString(5, status);
+			ps.setString(6, key);
 			ok = ps.execute();
 			ok = true;
 			if(ps != null) ps.close();
@@ -111,7 +109,7 @@ public class SensorDAO {
 			return key;
 		return null;
 	}
-	public static String[] getHours(String lotId) {
+	/*public static String[] getHours(String lotId) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		List<String> h = new ArrayList<String>();
@@ -160,7 +158,7 @@ public class SensorDAO {
 			System.out.println("setHours=" + ex.getMessage());
 		}
 		
-	}
+	}*/
 	private static String setSensorStatus(String key, String status)
 	{
 		Connection con = null;

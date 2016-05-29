@@ -1,6 +1,7 @@
 package org.irina.beans;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -9,6 +10,8 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
 import org.irina.dao.LoginDAO;
+import org.irina.dao.LotDAO;
+import org.irina.filter.Subscriber;
 
 //@ManagedBean
 //@SessionScoped
@@ -88,6 +91,7 @@ public class Login implements Serializable {
 		if (valid) {
 			HttpSession session = SessionBean.getSession();
 			session.setAttribute("username", user);
+			
 			return "admin";
 		} else {
 			FacesContext.getCurrentInstance().addMessage(
@@ -206,4 +210,5 @@ public class Login implements Serializable {
 		session.invalidate();
 		return "login";
 	}
+	
 }

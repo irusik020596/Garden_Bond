@@ -24,7 +24,7 @@ public class DataConnect{
 		        Class.forName("org.postgresql.Driver");
 			    Properties props = new Properties();
 			    props.setProperty("user","postgres");
-			    props.setProperty("password","Vjq gfhjkm");
+			    props.setProperty("password","gfhjkm");
 			    props.setProperty("charSet","WIN1251");
 		        conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/plants?prepareThreshold=0", props);
 	            

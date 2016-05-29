@@ -115,7 +115,7 @@ public class Rules implements Serializable {
         rule = new Rule(); // Reset placeholder.
     }
 
-    public void addcond() {
+    public void addcondit() {
         String key = getPrimaryKey();
         condition.setId(key);
         ConditionDAO.addCondition(rule.getId(), condition.getId(), condition.getSensorId(), condition.getOperation(), condition.getLimit());
@@ -123,7 +123,7 @@ public class Rules implements Serializable {
         condition = new Condition(); // Reset placeholder.
     }
 
-    public void edit(Rule rule) {
+    public void editM(Rule rule) {
         this.rule = rule;
         conditionlist = ConditionDAO.getConditions(rule.getId());
         edit = true;

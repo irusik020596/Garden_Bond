@@ -27,7 +27,7 @@ public class Sensors implements Serializable {
 
 	private static final long serialVersionUID = 1094801825228386363L;
 
-    public String[] hours;
+   /* public String[] hours;
     public String[] getHours() {
         return hours;
     }
@@ -86,7 +86,7 @@ public class Sensors implements Serializable {
     {
     	SensorDAO.setHours(lotId, hours);
     	//return "";
-    }
+    }*/
     
     private List<Sensor> list;
     private Sensor sensor = new Sensor();
@@ -101,7 +101,7 @@ public class Sensors implements Serializable {
 		HttpSession session = SessionBean.getSession();
 		lotId = (String)session.getAttribute("lotid");
 		lotName = (String)session.getAttribute("lotname");
-		hours = SensorDAO.getHours(lotId);
+		//hours = SensorDAO.getHours(lotId);
         list = SensorDAO.getSensors(lotId);
     }
     public String getLotId()
@@ -115,18 +115,18 @@ public class Sensors implements Serializable {
     public void add() {
         String key = getPrimaryKey();
         sensor.setId(key);
-        SensorDAO.addSensor(lotId, sensor.getId(), sensor.getName(), sensor.getDescription(), sensor.getType(), sensor.getHost(), sensor.getPort(), sensor.getStatus());
+        SensorDAO.addSensor(lotId, sensor.getId(), sensor.getName(), sensor.getDescription(), sensor.getType(), sensor.getSensorID(), sensor.getStatus());
         list.add(sensor);
         sensor = new Sensor(); // Reset placeholder.
     }
 
-    public void edit(Sensor sensor) {
+    public void editM(Sensor sensor) {
         this.sensor = sensor;
         edit = true;
     }
 
     public void save() {
-    	SensorDAO.editSensor(sensor.getId(), sensor.getName(), sensor.getDescription(), sensor.getType(), sensor.getHost(), sensor.getPort(), sensor.getStatus());
+    	SensorDAO.editSensor(sensor.getId(), sensor.getName(), sensor.getDescription(), sensor.getType(), sensor.getSensorID(), sensor.getStatus());
         sensor = new Sensor(); // Reset placeholder.
         edit = false;
     }

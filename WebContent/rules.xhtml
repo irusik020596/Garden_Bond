@@ -48,7 +48,7 @@
                 <h:column><f:facet name="header">SMSnote</f:facet>#{rule.smsnoteText}</h:column>
                 <h:column><f:facet name="header">EMAILnote</f:facet>#{rule.emailnoteText}</h:column>
                 <h:column><f:facet name="header">Type</f:facet>#{rule.typeText}</h:column>
-                <h:column><h:commandButton class="btn btn--empty" value="edit" action="#{rules.edit(rule)}" image="images/Pencil-icon.png" /></h:column>
+                <h:column><h:commandButton class="btn btn--empty" value="edit" action="#{rules.editM(rule)}" image="images/Pencil-icon.png" /></h:column>
                 <h:column><h:commandButton class="btn btn--empty" value="delete" action="#{rules.delete(rule)}" image="images/cross.png" /></h:column>
                 <h:column><h:commandButton class="btn btn--empty" value="new problem" action="#{rules.newproblem(rule)}" image="images/icon_more_action.png" /></h:column>
             </h:dataTable>
@@ -86,7 +86,7 @@
                 	<p class="form__group">
 						<label for="limit">Limit:</label>
                 	<h:inputText id="limit" value="#{rules.condition.limit}" class="form__control" /></p>
-	                <p class="form__group"><h:commandButton value="add" action="#{rules.addcond}" class="btn btn--primary" /></p>
+	                <p class="form__group"><h:commandButton value="add" action="#{rules.addcondit}" class="btn btn--primary" /></p>
             	</h:form>
         	</h:panelGroup>
 	        <h:panelGroup rendered="#{rules.editcond}">

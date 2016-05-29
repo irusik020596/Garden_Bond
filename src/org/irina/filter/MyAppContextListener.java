@@ -1,5 +1,6 @@
 package org.irina.filter;
 
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -7,23 +8,40 @@ import java.util.concurrent.TimeUnit;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import javax.servlet.http.HttpSession;
+
+import org.irina.beans.Item;
+import org.irina.beans.SessionBean;
+import org.irina.dao.LotDAO;
+
 
 @WebListener
 public class MyAppContextListener implements ServletContextListener {
-    private ScheduledExecutorService scheduler;
-
+    //private ScheduledExecutorService scheduler;
+	
+    
     @Override
     public void contextInitialized(ServletContextEvent event) {
+
+    	startSubscriber();
         //init sheduler
-        scheduler = Executors.newSingleThreadScheduledExecutor();
+        /*scheduler = Executors.newSingleThreadScheduledExecutor();
         //!!!Shedule task
         Runnable tasks = new org.irina.util.Tasks();
         
-        scheduler.scheduleAtFixedRate(tasks, 0, 1, TimeUnit.MINUTES);
+        scheduler.scheduleAtFixedRate(tasks, 0, 1, TimeUnit.MINUTES);*/
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent event) {
-        scheduler.shutdownNow();
+        //scheduler.shutdownNow();
     }
+    public void startSubscriber(){
+		List<Item> list = LotDAO.getAllLots();
+		for(Item item:list){
+			Subscriber subscriber = new Subscriber(item.getBroker_url(),item.getDomain());
+	    	subscriber.runClient();
+		}
+		
+	}
 }

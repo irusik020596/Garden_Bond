@@ -16,6 +16,7 @@ import org.irina.beans.Problem;
 import org.irina.beans.SessionBean;
 import org.irina.dao.LotDAO;
 import org.irina.dao.ProblemDAO;
+import org.irina.filter.Subscriber;
 
 
 @ManagedBean
@@ -48,20 +49,20 @@ public class Lots implements Serializable {
         String key = getPrimaryKey();
         // Actually, the DAO should already have set the ID from DB. This is just for demo.
         item.setId(key);
-        LotDAO.addLot(user, item.getId(), item.getDescription());
+        LotDAO.addLot(user, item.getId(), item.getDescription(), item.getDomain(),item.getBroker_url(),item.getBroker_login(),item.getBroker_password());
         list.add(item);
         item = new Item(); // Reset placeholder.
     }
 
-    public void edit(Item item) {
+    public void editM(Item item) {
         this.item = item;
         edit = true;
     }
 
     public void save() {
         // dao.update(item);
-    	LotDAO.editLot(item.getId(), item.getDescription());
-        item = new Item(); // Reset placeholder.
+    	LotDAO.editLot(item.getId(), item.getDescription(),item.getDomain(),item.getBroker_url(),item.getBroker_login(),item.getBroker_password());
+    	item = new Item(); // Reset placeholder.
         edit = false;
     }
 
@@ -119,6 +120,10 @@ public class Lots implements Serializable {
 		HttpSession session = SessionBean.getSession();
 		session.setAttribute("lotid", item.getId());
 		session.setAttribute("lotname", item.getDescription());
+		session.setAttribute("lotdomain", item.getDomain());
+		session.setAttribute("lotbroker_url", item.getBroker_url());
+		session.setAttribute("lotbroker_login", item.getBroker_login());
+		session.setAttribute("lotbroker_password", item.getBroker_password());
 		return sensors();
     }
 

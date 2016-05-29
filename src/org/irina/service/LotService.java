@@ -52,11 +52,15 @@ public class LotService {
 	   public String addLotAsGet(
 			   		@DefaultValue("") @QueryParam("user") String user,
 			   		@DefaultValue("") @QueryParam("password") String password,
-			   		@DefaultValue("") @QueryParam("description") String description
+			   		@DefaultValue("") @QueryParam("description") String description,
+			   		@DefaultValue("") @QueryParam("domain") String domain,
+			   		@DefaultValue("") @QueryParam("broker_url") String broker_url,
+			   		@DefaultValue("") @QueryParam("broker_url") String broker_login,
+			   		@DefaultValue("") @QueryParam("broker_password") String broker_password
 
 			   )
 	   {
-		   return RestDAO.addLot(user, password, description);
+		   return RestDAO.addLot(user, password, description,domain,  broker_url, broker_login,  broker_password);
 	   }	
 	   @POST
 	   @Path("/add")
@@ -66,13 +70,17 @@ public class LotService {
 //			   MultivaluedMap<String, String> params
 		   		@DefaultValue("") @QueryParam("user") String user,
 		   		@DefaultValue("") @QueryParam("password") String password,
-		   		@DefaultValue("") @QueryParam("description") String description
+		   		@DefaultValue("") @QueryParam("description") String description,
+		   		@DefaultValue("") @QueryParam("domain") String domain,
+		   		@DefaultValue("") @QueryParam("broker_url") String broker_url,
+		   		@DefaultValue("") @QueryParam("broker_url") String broker_login,
+		   		@DefaultValue("") @QueryParam("broker_password") String broker_password
 			   )
 	   {
 //	       String user = params.getFirst("user");
 //	       String password = params.getFirst("password");
 //	       String description = params.getFirst("description");
-	 	   return RestDAO.addLot(user, password, description);
+	 	   return RestDAO.addLot(user, password, description, domain,  broker_url, broker_login,  broker_password);
 	   }	
 	   @GET
 	   @Path("/edit")
@@ -83,11 +91,15 @@ public class LotService {
 			   		@DefaultValue("") @QueryParam("user") String user,
 			   		@DefaultValue("") @QueryParam("password") String password,
 			   		@DefaultValue("") @QueryParam("id") String id,
-			   		@DefaultValue("") @QueryParam("description") String description
+			   		@DefaultValue("") @QueryParam("description") String description,
+			   		@DefaultValue("") @QueryParam("domain") String domain,
+			   		@DefaultValue("") @QueryParam("broker_url") String broker_url,
+			   		@DefaultValue("") @QueryParam("broker_url") String broker_login,
+			   		@DefaultValue("") @QueryParam("broker_password") String broker_password
 
 			   )
 	   {
-		   return RestDAO.editLot(user, password, id, description);
+		   return RestDAO.editLot(user, password, id, description, domain,  broker_url, broker_login,  broker_password);
 	   }	
 	   @POST
 	   @Path("/edit")
@@ -98,14 +110,18 @@ public class LotService {
 		   		@DefaultValue("") @QueryParam("user") String user,
 		   		@DefaultValue("") @QueryParam("password") String password,
 		   		@DefaultValue("") @QueryParam("id") String id,
-		   		@DefaultValue("") @QueryParam("description") String description
+		   		@DefaultValue("") @QueryParam("description") String description,
+		   		@DefaultValue("") @QueryParam("domain") String domain,
+		   		@DefaultValue("") @QueryParam("broker_url") String broker_url,
+		   		@DefaultValue("") @QueryParam("broker_url") String broker_login,
+		   		@DefaultValue("") @QueryParam("broker_password") String broker_password
 			   )
 	   {
 //	       String user = params.getFirst("user");
 //	       String password = params.getFirst("password");
 //	       String id = params.getFirst("id");
 //	       String description = params.getFirst("description");
-	 	   return RestDAO.editLot(user, password, id, description);
+	 	   return RestDAO.editLot(user, password, id, description, domain,  broker_url, broker_login,  broker_password);
 	   }	
 	   @GET
 	   @Path("/delete")

@@ -7,7 +7,7 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 //START SNIPPET: code
-//@Stateless
+@Stateless
 @EJB(beanInterface = Friend.class, beanName = "RedBean", name = "myFriend")
 public class BlueBean implements Friend {
 

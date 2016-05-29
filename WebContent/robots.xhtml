@@ -47,11 +47,10 @@
                 <h:column><f:facet name="header">Name</f:facet>#{robot.name}</h:column>
                 <h:column><f:facet name="header">Description</f:facet>#{robot.description}</h:column>
                 <h:column><f:facet name="header">Type</f:facet>#{robot.typeText}</h:column>
-                <h:column><f:facet name="header">Host</f:facet>#{robot.host}</h:column>
-                <h:column><f:facet name="header">Port</f:facet>#{robot.port}</h:column>
+                <h:column><f:facet name="header">Subdomain</f:facet>#{robot.subdomain}</h:column>
                 <h:column><f:facet name="header">Status</f:facet>#{robot.statusText}</h:column>
                 <h:column><f:facet name="header">State</f:facet>#{robot.stateText}</h:column>
-                <h:column><h:commandButton class="btn btn--empty" value="edit" action="#{robots.edit(robot)}" image="images/Pencil-icon.png" /></h:column>
+                <h:column><h:commandButton class="btn btn--empty" value="edit" action="#{robots.editM(robot)}" image="images/Pencil-icon.png" /></h:column>
                 <h:column><h:commandButton class="btn btn--empty" value="delete" action="#{robots.delete(robot)}" image="images/cross.png" /></h:column>
             </h:dataTable>
         </h:form>
@@ -85,11 +84,8 @@
 				   			<f:selectItems value="#{robots.robotStateValue}" />
    						</h:selectOneListbox></p>
                 <p class="form__group">
-						<label for="host">Host:</label>
-                <h:inputText id="host" value="#{robots.robot.host}" class="form__control" /></p>
-                <p class="form__group">
-						<label for="port">Port:</label>
-                <h:inputText id="port" value="#{robots.robot.port}" class="form__control" /></p>
+						<label for="subdomain">Subdomain:</label>
+                <h:inputText id="subdomain" value="#{robots.robot.subdomain}" class="form__control" /></p>
                 <p class="form__group">
 						<label for="rules">Activate rules:</label>
                 <h:selectManyCheckbox id="rules" value="#{robots.ruleData}" class="form__control">
@@ -123,11 +119,8 @@
 				   			<f:selectItems value="#{robots.robotStateValue}" />
    						</h:selectOneListbox></p>
                 <p class="form__group">
-						<label for="host">Host:</label>
-                <h:inputText id="host" value="#{robots.robot.host}" class="form__control" /></p>
-                <p class="form__group">
-						<label for="port">Port:</label>
-                <h:inputText id="port" value="#{robots.robot.port}" class="form__control" /></p>
+						<label for="subdomain">Subdomain:</label>
+                <h:inputText id="subdomain" value="#{robots.robot.subdomain}" class="form__control" /></p>
                 <p class="form__group">
 						<label for="rules">Activate rules:</label>
                 <h:selectManyCheckbox id="rules" value="#{robots.ruleData}" class="form__control">
