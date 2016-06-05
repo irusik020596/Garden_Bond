@@ -1,13 +1,15 @@
 package org.irina.beans;
 //import java.util.List;
 
+import java.io.Serializable;
+
 //import javax.ws.rs.Produces;
 //import javax.ws.rs.core.MediaType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "item")
-public class Item {
+public class Item implements Serializable  {
 	private String id;
 	private String description;
 	private String domain;

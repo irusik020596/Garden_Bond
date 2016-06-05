@@ -47,7 +47,6 @@
 		                	<h:column><f:facet name="header">Name</f:facet>#{sensor.name}</h:column>
         		        	<h:column><f:facet name="header">Description</f:facet>#{sensor.description}</h:column>
                 			<h:column><f:facet name="header">Type</f:facet>#{sensor.typeText}</h:column>
-                			<h:column><f:facet name="header">Sensor ID</f:facet>#{sensor.sensorID}</h:column>
                 			<h:column><f:facet name="header">Status</f:facet>#{sensor.statusText}</h:column>
                 			<h:column><h:commandButton class="btn btn--empty" value="edit" action="#{sensors.editM(sensor)}" image="images/Pencil-icon.png" /></h:column>
                 			<h:column><h:commandButton class="btn btn--empty" value="delete" action="#{sensors.delete(sensor)}" image="images/cross.png" /></h:column>
@@ -78,9 +77,6 @@
 		                <h:selectOneListbox id="status" value="#{sensors.sensor.status}" class="form__control">
 				   			<f:selectItems value="#{sensors.sensorStatusValue}" />
    						</h:selectOneListbox></p>
-                <p class="form__group">
-						<label for="sensorID">Sensor ID:</label>
-                <h:inputText id="sensorID" value="#{sensors.sensor.sensorID}" class="form__control" /></p>
                 <p class="form__group"><h:commandButton value="add" action="#{sensors.add}" class="btn btn--primary" /></p>
             </h:form>
         </h:panelGroup>
@@ -103,9 +99,6 @@
 		                <h:selectOneListbox id="status" value="#{sensors.sensor.status}" class="form__control">
 				   			<f:selectItems value="#{sensors.sensorStatusValue}" />
    						</h:selectOneListbox></p>
-                <p class="form__group">
-						<label for="sensorID">Sensor ID:</label>
-                <h:inputText id="sensorID" value="#{sensors.sensor.sensorID}" class="form__control" /></p>
                 <p class="form__group"><h:commandButton value="save" action="#{sensors.save}" class="btn btn--primary" /></p>
             </h:form>
         </h:panelGroup>

@@ -39,6 +39,9 @@ public class MyAppContextListener implements ServletContextListener {
     public void startSubscriber(){
 		List<Item> list = LotDAO.getAllLots();
 		for(Item item:list){
+			//System.out.println("URL:  " + item.getBroker_url());
+			//System.out.println("Domain: " + item.getDomain());
+
 			Subscriber subscriber = new Subscriber(item.getBroker_url(),item.getDomain());
 	    	subscriber.runClient();
 		}

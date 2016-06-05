@@ -1,11 +1,14 @@
 package org.irina.beans;
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.irina.util.HandBook;
 
 @XmlRootElement(name="condition")
-public class Condition {
+public class Condition implements Serializable {
+	
 	private String id;
 	private String sensorId;
 	private String operation;
@@ -60,5 +63,9 @@ public class Condition {
 	public String getOperationText()
 	{
 		return HandBook.getOperation(operation);
+	}
+	@Override
+	public String toString() {
+		return "Condition [id=" + id + ", sensorId=" + sensorId + ", operation=" + operation + ", limit=" + limit + "]";
 	}
 }

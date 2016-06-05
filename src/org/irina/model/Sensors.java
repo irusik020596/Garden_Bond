@@ -115,7 +115,7 @@ public class Sensors implements Serializable {
     public void add() {
         String key = getPrimaryKey();
         sensor.setId(key);
-        SensorDAO.addSensor(lotId, sensor.getId(), sensor.getName(), sensor.getDescription(), sensor.getType(), sensor.getSensorID(), sensor.getStatus());
+        SensorDAO.addSensor(lotId, sensor.getId(), sensor.getName(), sensor.getDescription(), sensor.getType(), sensor.getStatus());
         list.add(sensor);
         sensor = new Sensor(); // Reset placeholder.
     }
@@ -126,7 +126,7 @@ public class Sensors implements Serializable {
     }
 
     public void save() {
-    	SensorDAO.editSensor(sensor.getId(), sensor.getName(), sensor.getDescription(), sensor.getType(), sensor.getSensorID(), sensor.getStatus());
+    	SensorDAO.editSensor(sensor.getId(), sensor.getName(), sensor.getDescription(), sensor.getType(), sensor.getStatus());
         sensor = new Sensor(); // Reset placeholder.
         edit = false;
     }

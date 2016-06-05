@@ -1,37 +1,34 @@
 package org.irina.beans;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.irina.util.HandBook;
 
 @XmlRootElement(name = "sensor")
-public class Sensor {
+public class Sensor implements Serializable {
 	private String id;
 	// private String lotId;
 	private String name;
 	private String description;
-	private String sensorID;
 	// private String host;
 	// private String port;
 	private String type;
 	private String status;
 
-	public Sensor(String id, /* String lotId, */ String name, String description, String type, String sensorID,
-			String status) {
+	public Sensor(String id, /* String lotId, */ String name, String description, String type, String status) {
 		this.id = id;
 		// this.lotId =lotId;
 		this.name = name;
 		this.description = description;
 		this.type = type;
-		this.sensorID = sensorID;
-		// this.host = host;
-		// this.port = port;
 		this.status = status;
 	}
 
 	public Sensor() {
-		this(null, /* null, */ null, null, null, null, null);
+		this(null, null, null, null, null);
 	}
 
 	@XmlElement(name = "id", required = true)
@@ -63,15 +60,6 @@ public class Sensor {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	@XmlElement(name = "sensorID", required = true)
-	public String getSensorID() {
-		return sensorID;
-	}
-
-	public void setSensorID(String sensorID) {
-		this.sensorID = sensorID;
 	}
 
 	/*

@@ -40,11 +40,10 @@ public class SensorService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status
 			   )
 	   {
-		   return RestDAO.addSensor(user, password, lotId, name, description, type, subdomain, status);
+		   return RestDAO.addSensor(user, password, lotId, name, description, type, status);
 	   }	
 	   @GET
 	   @Path("/edit")
@@ -56,11 +55,10 @@ public class SensorService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status
 			   )
 	   {
-		   return RestDAO.editSensor(user, password, id, name, description, type, subdomain, status);
+		   return RestDAO.editSensor(user, password, id, name, description, type, status);
 	   }	
 	   @GET
 	   @Path("/delete")
@@ -120,11 +118,10 @@ public class SensorService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status
 			   )
 	   {
-		   return RestDAO.addSensor(user, password, lotId, name, description, type, subdomain, status);
+		   return RestDAO.addSensor(user, password, lotId, name, description, type, status);
 	   }	
 	   @POST
 	   @Path("/edit")
@@ -140,7 +137,7 @@ public class SensorService {
 			   		@DefaultValue("") @QueryParam("status") String status
 			   )
 	   {
-		   return RestDAO.editSensor(user, password, id, name, description, type, subdomain, status);
+		   return RestDAO.editSensor(user, password, id, name, description, type, status);
 	   }	
 	   @POST
 	   @Path("/delete")

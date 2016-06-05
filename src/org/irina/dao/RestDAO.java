@@ -63,22 +63,22 @@ public class RestDAO
 		}
 		return l;
 	}
-   	public static String addSensor(String user, String password, String lotId, String name, String description, String type, String sensorID, String status)
+   	public static String addSensor(String user, String password, String lotId, String name, String description, String type, String status)
    	{
    		String r = null;
 		if(LoginDAO.validateLogin(user, password))
 		{
 			String key = getKey();
-			r = SensorDAO.addSensor(lotId, key, name, description, type, sensorID, status);
+			r = SensorDAO.addSensor(lotId, key, name, description, type, status);
 		}
 		return r;
    	}
-   	public static String editSensor(String user, String password, String key, String name, String description, String type, String sensorID, String status)
+   	public static String editSensor(String user, String password, String key, String name, String description, String type, String status)
    	{
    		String r = null;
    		if(LoginDAO.validateLogin(user, password))
 		{
-			r = SensorDAO.editSensor(key, name, description, type, sensorID, status);
+			r = SensorDAO.editSensor(key, name, description, type, status);
 		}
 		return r;
    	}   
@@ -195,13 +195,13 @@ public class RestDAO
 		}
 		return l;
 	}
-   	public static String addRobot(String user, String password, String lotId, String name, String description, String type, String sensorID, String status, String state)
+   	public static String addRobot(String user, String password, String lotId, String name, String description, String type, String subdomain, String status, String state)
    	{
    		String r = null;
 		if(LoginDAO.validateLogin(user, password))
 		{
 			String key = getKey();
-			r = RobotDAO.addRobot(lotId, key, name, description, type, sensorID, status, state);
+			r = RobotDAO.addRobot(lotId, key, name, description, type, subdomain, status, state);
 		}
 		return r;
    	}

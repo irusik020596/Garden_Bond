@@ -2,14 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>List of robots</title>
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>List of robots</title>
 	<meta name="viewport" content="width=device-width" />
 	<link rel="stylesheet" type="text/css" href="css/all-dist.css" />
-    </h:head>
-    <h:body>
+</h:head>
+<h:body>
 	<div class="wrapper wrapper--base">
 		<div class="header">
 			<div class="container">
@@ -18,134 +18,173 @@
 		</div>
 		<div class="main">
 			<div class="container">
-			    <h:form>
-				<div class="menu">
-					<input type="checkbox" id="hmt" class="menu__hidden-ticker"/>
-					<label class="menu__btn" for="hmt">
-					  <span class="first"></span>
-					  <span class="second"></span>
-					  <span class="third"></span>
-					</label>
-					<div class="logo--small">
-					  	<img src="images/logo2.png" alt=""/>
+				<h:form>
+					<div class="menu">
+						<input type="checkbox" id="hmt" class="menu__hidden-ticker" /> <label
+							class="menu__btn" for="hmt"> <span class="first"></span>
+							<span class="second"></span> <span class="third"></span>
+						</label>
+						<div class="logo--small">
+							<img src="images/logo2.png" alt="" />
+						</div>
+						<ul class="menu__hidden">
+							<li class="menu__title">menu</li>
+							<li><img src="images/logout.png" alt="" class="menu__icon" />
+								<h:commandLink action="#{login.logout}" value="Logout"></h:commandLink></li>
+							<li><img src="images/plot.png" alt="" class="menu__icon" />
+								<h:commandLink action="#{lots.lots}" value="Plots"></h:commandLink></li>
+							<li><img src="images/sensor.png" alt="" class="menu__icon" />
+								<h:commandLink action="#{lots.sensors}" value="Sensors"></h:commandLink></li>
+							<li><img src="images/rules.png" alt="" class="menu__icon" />
+								<h:commandLink action="#{lots.rules}" value="Rules"></h:commandLink></li>
+						</ul>
 					</div>
-					<ul class="menu__hidden">
-						<li class="menu__title">menu</li>
-						<li><img src="images/logout.png" alt="" class="menu__icon"/><h:commandLink action="#{login.logout}" value="Logout"></h:commandLink></li>
-						<li><img src="images/plot.png" alt="" class="menu__icon"/><h:commandLink action="#{lots.lots}" value="Plots"></h:commandLink></li>
-						<li><img src="images/sensor.png" alt="" class="menu__icon"/><h:commandLink action="#{lots.sensors}" value="Sensors"></h:commandLink></li>
-						<li><img src="images/rules.png" alt="" class="menu__icon"/><h:commandLink action="#{lots.rules}" value="Rules"></h:commandLink></li>
-					</ul>
-				</div>
-			    </h:form>
+				</h:form>
 				<div class="edition">
 					<div class="left">
-        <h3 class="heading heading--primary heading--center">List robots</h3>
-         <h:form rendered="#{not empty robots.list}">
-            <h:dataTable value="#{robots.list}" var="robot">
-<!--                  <h:column><f:facet name="header">ID</f:facet>#{robot.id}</h:column> -->
-                <h:column><f:facet name="header">Name</f:facet>#{robot.name}</h:column>
-                <h:column><f:facet name="header">Description</f:facet>#{robot.description}</h:column>
-                <h:column><f:facet name="header">Type</f:facet>#{robot.typeText}</h:column>
-                <h:column><f:facet name="header">Subdomain</f:facet>#{robot.subdomain}</h:column>
-                <h:column><f:facet name="header">Status</f:facet>#{robot.statusText}</h:column>
-                <h:column><f:facet name="header">State</f:facet>#{robot.stateText}</h:column>
-                <h:column><h:commandButton class="btn btn--empty" value="edit" action="#{robots.editM(robot)}" image="images/Pencil-icon.png" /></h:column>
-                <h:column><h:commandButton class="btn btn--empty" value="delete" action="#{robots.delete(robot)}" image="images/cross.png" /></h:column>
-            </h:dataTable>
-        </h:form>
-        <h:panelGroup rendered="#{empty robots.list}">
-            <p>Table is empty! Please add new robots.</p>
-        </h:panelGroup>
+						<h3 class="heading heading--primary heading--center">List
+							robots</h3>
+						<h:form rendered="#{not empty robots.list}">
+							<h:dataTable value="#{robots.list}" var="robot">
+								<!--                  <h:column><f:facet name="header">ID</f:facet>#{robot.id}</h:column> -->
+								<h:column>
+									<f:facet name="header">Name</f:facet>#{robot.name}</h:column>
+								<h:column>
+									<f:facet name="header">Description</f:facet>#{robot.description}</h:column>
+								<h:column>
+									<f:facet name="header">Type</f:facet>#{robot.typeText}</h:column>
+								<h:column>
+									<f:facet name="header">Status</f:facet>#{robot.statusText}</h:column>
+								<h:column>
+									<f:facet name="header">State</f:facet>#{robot.stateText}</h:column>
+								<h:column>
+									<h:commandButton class="btn btn--empty" value="edit"
+										action="#{robots.editM(robot)}" image="images/Pencil-icon.png" />
+								</h:column>
+								<h:column>
+									<h:commandButton class="btn btn--empty" value="delete"
+										action="#{robots.delete(robot)}" image="images/cross.png" />
+								</h:column>
+							</h:dataTable>
+						</h:form>
+						<h:panelGroup rendered="#{empty robots.list}">
+							<p>Table is empty! Please add new robots.</p>
+						</h:panelGroup>
 					</div>
 					<div class="right">
-        <h:panelGroup rendered="#{!robots.edit}">
-            <h3 class="heading heading--primary heading--center">Add robot</h3>
-            <h:form class="form form--adding">
-                <p class="form__group">
-						<label for="name">Name:</label>
-                <h:inputText id="name" value="#{robots.robot.name}" class="form__control" /></p>
-                <p class="form__group">
-						<label for="description">Description:</label>
-                <h:inputText id="description" value="#{robots.robot.description}" class="form__control" /></p>
-                <p class="form__group">
-						<label for="type">Type:</label>
-		                <h:selectOneListbox id="type" value="#{robots.robot.type}" class="form__control">
-				   			<f:selectItems value="#{robots.robotTypeValue}" />
-   						</h:selectOneListbox></p>
-                <p class="form__group">
-						<label for="status">Status:</label>
-		                <h:selectOneListbox id="status" value="#{robots.robot.status}" class="form__control">
-				   			<f:selectItems value="#{robots.robotStatusValue}" />
-   						</h:selectOneListbox></p>
-                <p class="form__group">
-						<label for="state">State:</label>
-		                <h:selectOneListbox id="state" value="#{robots.robot.state}" class="form__control">
-				   			<f:selectItems value="#{robots.robotStateValue}" />
-   						</h:selectOneListbox></p>
-                <p class="form__group">
-						<label for="subdomain">Subdomain:</label>
-                <h:inputText id="subdomain" value="#{robots.robot.subdomain}" class="form__control" /></p>
-                <p class="form__group">
-						<label for="rules">Activate rules:</label>
-                <h:selectManyCheckbox id="rules" value="#{robots.ruleData}" class="form__control">
-                 <f:selectItems value="#{robots.ruleValues}"/>
-                </h:selectManyCheckbox></p>
-                <p class="form__group"><h:commandButton value="add" action="#{robots.add}" class="btn btn--primary" /></p>
-            </h:form>
-        </h:panelGroup>
-        <h:panelGroup rendered="#{robots.edit}">
-            <h3 class="heading heading--primary heading--center">Edit #{robots.robot.description}</h3>
-            <h:form class="form form--adding">
-                <p class="form__group">
-						<label for="name">Name:</label>
-                <h:inputText id="name" value="#{robots.robot.name}" class="form__control" /></p>
-                <p class="form__group">
-						<label for="description">Description:</label>
-                <h:inputText id="description" value="#{robots.robot.description}" class="form__control" /></p>
-                <p class="form__group">
-						<label for="type">Type:</label>
-		                <h:selectOneListbox id="type" value="#{robots.robot.type}" class="form__control">
-				   			<f:selectItems value="#{robots.robotTypeValue}" />
-   						</h:selectOneListbox></p>
-                <p class="form__group">
-						<label for="status">Status:</label>
-		                <h:selectOneListbox id="status" value="#{robots.robot.status}" class="form__control">
-				   			<f:selectItems value="#{robots.robotStatusValue}" />
-   						</h:selectOneListbox></p>
-                <p class="form__group">
-						<label for="state">State:</label>
-		                <h:selectOneListbox id="state" value="#{robots.robot.state}" class="form__control">
-				   			<f:selectItems value="#{robots.robotStateValue}" />
-   						</h:selectOneListbox></p>
-                <p class="form__group">
-						<label for="subdomain">Subdomain:</label>
-                <h:inputText id="subdomain" value="#{robots.robot.subdomain}" class="form__control" /></p>
-                <p class="form__group">
-						<label for="rules">Activate rules:</label>
-                <h:selectManyCheckbox id="rules" value="#{robots.ruleData}" class="form__control">
-                 <f:selectItems value="#{robots.ruleValues}"/>
-                </h:selectManyCheckbox></p>
-                <p class="form__group"><h:commandButton value="save" action="#{robots.save}" class="btn btn--primary" /></p>
-            </h:form>
-        </h:panelGroup> 
-</div>        
-</div>
-</div>
+						<h:panelGroup rendered="#{!robots.edit}">
+							<h3 class="heading heading--primary heading--center">Add
+								robot</h3>
+							<h:form class="form form--adding">
+								<p class="form__group">
+									<label for="name">Name:</label>
+									<h:inputText id="name" value="#{robots.robot.name}"
+										class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="description">Description:</label>
+									<h:inputText id="description"
+										value="#{robots.robot.description}" class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="type">Type:</label>
+									<h:selectOneListbox id="type" value="#{robots.robot.type}"
+										class="form__control">
+										<f:selectItems value="#{robots.robotTypeValue}" />
+									</h:selectOneListbox>
+								</p>
+								<p class="form__group">
+									<label for="status">Status:</label>
+									<h:selectOneListbox id="status" value="#{robots.robot.status}"
+										class="form__control">
+										<f:selectItems value="#{robots.robotStatusValue}" />
+									</h:selectOneListbox>
+								</p>
+								<p class="form__group">
+									<label for="state">State:</label>
+									<h:selectOneListbox id="state" value="#{robots.robot.state}"
+										class="form__control">
+										<f:selectItems value="#{robots.robotStateValue}" />
+									</h:selectOneListbox>
+								</p>
+								<p class="form__group">
+									<label for="rules">Activate rules:</label>
+									<h:selectManyCheckbox id="rules" value="#{robots.ruleData}"
+										class="form__control">
+										<f:selectItems value="#{robots.ruleValues}" />
+									</h:selectManyCheckbox>
+								</p>
+								<p class="form__group">
+									<h:commandButton value="add" action="#{robots.add}"
+										class="btn btn--primary" />
+								</p>
+							</h:form>
+						</h:panelGroup>
+						<h:panelGroup rendered="#{robots.edit}">
+							<h3 class="heading heading--primary heading--center">Edit
+								#{robots.robot.description}</h3>
+							<h:form class="form form--adding">
+								<p class="form__group">
+									<label for="name">Name:</label>
+									<h:inputText id="name" value="#{robots.robot.name}"
+										class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="description">Description:</label>
+									<h:inputText id="description"
+										value="#{robots.robot.description}" class="form__control" />
+								</p>
+								<p class="form__group">
+									<label for="type">Type:</label>
+									<h:selectOneListbox id="type" value="#{robots.robot.type}"
+										class="form__control">
+										<f:selectItems value="#{robots.robotTypeValue}" />
+									</h:selectOneListbox>
+								</p>
+								<p class="form__group">
+									<label for="status">Status:</label>
+									<h:selectOneListbox id="status" value="#{robots.robot.status}"
+										class="form__control">
+										<f:selectItems value="#{robots.robotStatusValue}" />
+									</h:selectOneListbox>
+								</p>
+								<p class="form__group">
+									<label for="state">State:</label>
+									<h:selectOneListbox id="state" value="#{robots.robot.state}"
+										class="form__control">
+										<f:selectItems value="#{robots.robotStateValue}" />
+									</h:selectOneListbox>
+								</p>
+								<p class="form__group">
+									<label for="rules">Activate rules:</label>
+									<h:selectManyCheckbox id="rules" value="#{robots.ruleData}"
+										class="form__control">
+										<f:selectItems value="#{robots.ruleValues}" />
+									</h:selectManyCheckbox>
+								</p>
+								<p class="form__group">
+									<h:commandButton value="save" action="#{robots.save}"
+										class="btn btn--primary" />
+								</p>
+							</h:form>
+						</h:panelGroup>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="footer">
-			<div class="copyright">
-				<span class="copyright__text">Talamash Kharkiv 2015 (c)</span>
-			</div>
-			<div class="social">
-				<span class="social__text">Следите за нами в социальных сетях:</span>
-				<a href="#" class="social__link"><span class="icon-vk"></span></a>
-				<a href="#" class="social__link"><span class="icon-facebook"></span></a>
-				<a href="#" class="social__link"><span class="icon-twitter"></span></a>
-				<a href="#" class="social__link"><span class="icon-youtube"></span></a>
-				<a href="#" class="social__link"><span class="icon-linkedin"></span></a>
-			</div>
+		<div class="copyright">
+			<span class="copyright__text">Talamash Kharkiv 2015 (c)</span>
+		</div>
+		<div class="social">
+			<span class="social__text">Следите за нами в социальных сетях:</span>
+			<a href="#" class="social__link"><span class="icon-vk"></span></a> <a
+				href="#" class="social__link"><span class="icon-facebook"></span></a>
+			<a href="#" class="social__link"><span class="icon-twitter"></span></a>
+			<a href="#" class="social__link"><span class="icon-youtube"></span></a>
+			<a href="#" class="social__link"><span class="icon-linkedin"></span></a>
+		</div>
 	</div>
-    </h:body>
+</h:body>
 </html>

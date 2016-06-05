@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="problem")
 public class Problem {
+	
 	private String id;
 	private String lot;
 	private String rule;
@@ -67,5 +68,10 @@ public class Problem {
     public void setNotes(String notes)
 	{
 		this.notes = notes;
+	}
+    @Override
+	public String toString() {
+		return "Problem [id=" + id + ", lot=" + lot + ", rule=" + rule + ", notes=" + notes + ", attime=" + attime
+				+ "]";
 	}
 }
