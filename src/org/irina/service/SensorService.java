@@ -133,7 +133,6 @@ public class SensorService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status
 			   )
 	   {

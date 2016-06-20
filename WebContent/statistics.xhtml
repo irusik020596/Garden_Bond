@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Statistics</title>
+	<meta name="viewport" content="width=device-width" />
+	<link rel="stylesheet" type="text/css" href="css/all.css" />
+</h:head>
+<h:body>
+	<div class="wrapper wrapper--base">
+		<div class="header">
+			<div class="container">
+				<h1>Welcome #{login.user}</h1>
+				<h:form>
+					<div class="menu">
+						<input type="checkbox" id="hmt" class="menu__hidden-ticker" /> <label
+							class="menu__btn" for="hmt"> <span class="first"></span>
+							<span class="second"></span> <span class="third"></span>
+						</label>
+						<div class="logo--small">
+							<img src="images/logo2.png" alt="" />
+						</div>
+						<ul class="menu__hidden">
+							<li class="menu__title">menu</li>
+							<li><img src="images/logout.png" alt="" class="menu__icon" />
+								<h:commandLink action="#{login.logout}" value="Logout"></h:commandLink></li>
+							<li><img src="images/plot.png" alt="" class="menu__icon" />
+								<h:commandLink action="#{lots.lots}" value="Lots"></h:commandLink></li>
+						</ul>
+					</div>
+				</h:form>
+			</div>
+		</div>
+		<div class="main">
+			<div class="container">
+				<h3 class="heading heading--primary heading--left">Problems on
+					Lot</h3>
+				<h:form rendered="#{not empty statistics.listStatistics}">
+					<h:dataTable class="table" value="#{statistics.listStatistics}"
+						var="statistic">
+						<h:column>
+							<f:facet name="header">Lot</f:facet>#{statistic.lotDescription}</h:column>
+						<h:column>
+							<f:facet name="header">Sensor</f:facet>#{statistic.sensorName}</h:column>
+						<h:column>
+							<f:facet name="header">How many problems</f:facet>#{statistic.problemsCount}</h:column>
+						<h:column>
+							<h:commandButton class="btn btn--empty" value="details"
+								action="#{statistics.renew(statistic.sensorId,statistic.sensorName, statistic.lotDescription )}" image="images/detail.png" />
+						</h:column>
+					</h:dataTable>
+				</h:form>
+
+				<h:panelGroup rendered="#{empty statistics.listStatistics}">
+					<p>Sorry! No information.</p>
+				</h:panelGroup>
+			</div>
+			<div class="container">
+				<h3 class="heading heading--orange heading--left">All problems on the #{statistics.sensorName} at #{statistics.lot}</h3>
+				<h:form rendered="#{not empty statistics.prevProblems}">
+					<h:dataTable class="table" value="#{statistics.prevProblems}"
+						var="problem">
+						<h:column>
+							<f:facet name="header">Date and time</f:facet>#{problem.attime}</h:column>
+						<h:column>
+							<f:facet name="header">Lot</f:facet>#{problem.lot}</h:column>
+						<h:column>
+							<f:facet name="header">Rule</f:facet>#{problem.rule}</h:column>
+						<h:column>
+							<f:facet name="header">Causes</f:facet>#{problem.notes}</h:column>
+					
+					</h:dataTable>
+				</h:form>
+				<h:panelGroup rendered="#{empty statistics.prevProblems}">
+					<p>Something went wrong!</p>
+				</h:panelGroup>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<div class="copyright">
+			<span class="copyright__text">Talamash Kharkiv 2015 (c)</span>
+		</div>
+		<div class="social">
+			<span class="social__text">Следите за нами в социальных сетях:</span>
+			<a href="#" class="social__link"><span class="icon-vk"></span></a> <a
+				href="#" class="social__link"><span class="icon-facebook"></span></a>
+			<a href="#" class="social__link"><span class="icon-twitter"></span></a>
+			<a href="#" class="social__link"><span class="icon-youtube"></span></a>
+			<a href="#" class="social__link"><span class="icon-linkedin"></span></a>
+		</div>
+	</div>
+</h:body>
+</html>

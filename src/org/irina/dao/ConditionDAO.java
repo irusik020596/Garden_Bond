@@ -139,16 +139,16 @@ public class ConditionDAO {
 	public static String getRuleByCoditionId(String id) {
 		Connection con = null;
 		PreparedStatement ps = null;
-		String ruleName = "";
+		String ruleId = "";
 
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select name from rules where id =( Select ruleId from Conditions where id = ?)");
+			ps = con.prepareStatement("Select ruleId from Conditions where id = ?");
 			ps.setString(1, id);
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				ruleName = rs.getString(1);
+				ruleId = rs.getString(1);
 			}
 			if (rs != null)
 				rs.close();
@@ -157,9 +157,9 @@ public class ConditionDAO {
 		} catch (SQLException ex) {
 			System.out.println("Conditions getRuleByCoditionId -->" + ex.getMessage());
 		}
-		return ruleName;
+		return ruleId;
 	}
-	public static String getLotByCoditionId(String id) {
+	/*public static String getLotByCoditionId(String id) {
 		Connection con = null;
 		PreparedStatement ps = null;
 		String lotName = "";
@@ -181,5 +181,5 @@ public class ConditionDAO {
 			System.out.println("Conditions getLotByCoditionId -->" + ex.getMessage());
 		}
 		return lotName;
-	}
+	}*/
 }

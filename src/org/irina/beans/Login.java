@@ -11,10 +11,10 @@ import javax.servlet.http.HttpSession;
 
 import org.irina.dao.LoginDAO;
 import org.irina.dao.LotDAO;
-import org.irina.filter.Subscriber;
+import org.irina.util.Subscriber;
 
-//@ManagedBean
-//@SessionScoped
+@ManagedBean
+@SessionScoped
 public class Login implements Serializable {
 
 	private static final long serialVersionUID = 1094801825228386363L;

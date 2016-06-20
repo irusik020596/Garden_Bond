@@ -89,7 +89,7 @@ public class Robots implements Serializable {
     public void add() {
         String key = getPrimaryKey();
         robot.setId(key);
-        RobotDAO.addRobot(lotId, robot.getId(), robot.getName(), robot.getDescription(), robot.getType(), robot.getSubdomain(), robot.getStatus(), robot.getState());
+        RobotDAO.addRobot(lotId, robot.getId(), robot.getName(), robot.getDescription(), robot.getType(), robot.getStatus(), robot.getState());
     	RobotDAO.setRules(robot.getId(),ruleData);
         list.add(robot);
         robot = new Robot(); // Reset placeholder.
@@ -110,7 +110,7 @@ public class Robots implements Serializable {
     }
 
     public void save() {
-    	RobotDAO.editRobot(robot.getId(), robot.getName(), robot.getDescription(), robot.getType(), robot.getSubdomain(), robot.getStatus(), robot.getState());
+    	RobotDAO.editRobot(robot.getId(), robot.getName(), robot.getDescription(), robot.getType(), robot.getStatus(), robot.getState());
     	RobotDAO.setRules(robot.getId(),ruleData);
 for(int i = 0; i < ruleData.length; i++)
 	System.out.println("ruleData[" + i + "]=" + ruleData[i]);

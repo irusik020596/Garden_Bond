@@ -19,14 +19,14 @@ public class RobotDAO {
 
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select id, name, description, type, subdomain, status, state from Robots where lotId = ?");
+			ps = con.prepareStatement("Select id, name, description, type, status, state from Robots where lotId = ?");
 			ps.setString(1, lotId);
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				String key1 = rs.getString(1);
 				String name = rs.getString(2);
-				Robot s = new Robot(key1, name, rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
+				Robot s = new Robot(key1, name, rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
 				list.add(s);
 			}
 			if(rs != null) rs.close();
@@ -37,7 +37,7 @@ public class RobotDAO {
 		}
 		return list;
 	}
-	public static String addRobot(String lotId, String key, String name, String description, String type, String subdomain, String status, String state)
+	public static String addRobot(String lotId, String key, String name, String description, String type, String status, String state)
 	{
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -45,15 +45,14 @@ public class RobotDAO {
 		
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("insert into Robots(lotId, id, name, description, type, subdomain, status, state) values(?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			ps = con.prepareStatement("insert into Robots(lotId, id, name, description, type, status, state) values(?, ?, ?, ?, ?, ?, ?)");
 			ps.setString(1, lotId);
 			ps.setString(2, key);
 			ps.setString(3, name);
 			ps.setString(4, description);
 			ps.setString(5, type);
-			ps.setString(6, subdomain);
-			ps.setString(7, status);
-			ps.setString(8, state);
+			ps.setString(6, status);
+			ps.setString(7, state);
 			ok = ps.execute();
 			ok = true;
 			if(ps != null) ps.close();
@@ -67,21 +66,20 @@ public class RobotDAO {
 			return key;
 		return null;
 	}
-	public static String editRobot(String key, String name, String description, String type, String subdomain, String status, String state)
+	public static String editRobot(String key, String name, String description, String type, String status, String state)
 	{
 		Connection con = null;
 		PreparedStatement ps = null;
 		boolean ok = true;
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("update Robots set name = ?, description = ?, type = ?, subdomain = ?, status = ?, tate = ? where id = ?");
+			ps = con.prepareStatement("update Robots set name = ?, description = ?, type = ?, status = ?, tate = ? where id = ?");
 			ps.setString(1, name);
 			ps.setString(2, description);
 			ps.setString(3, type);
-			ps.setString(4, subdomain);
-			ps.setString(5, status);
-			ps.setString(6, state);
-			ps.setString(7, key);
+			ps.setString(4, status);
+			ps.setString(5, state);
+			ps.setString(6, key);
 			ok = ps.execute();
 			ok = true;
 			if(ps != null) ps.close();

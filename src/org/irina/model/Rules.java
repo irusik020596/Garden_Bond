@@ -174,12 +174,12 @@ public class Rules implements Serializable {
     	}
     	return s;
     }
-    public void newproblem(Rule rule) {
+    /*public void newproblem(Rule rule) {
         String key = getPrimaryKey();
         List<Condition> clist =  ConditionDAO.getConditions(rule.getId());
         String notes = noteConditions(clist);
     	ProblemDAO.newProblem(key, rule.getId(), notes);
-    }
+    }*/
 
     public void deleteCond(Condition condition) {
     	ConditionDAO.deleteCondition(condition.getId());

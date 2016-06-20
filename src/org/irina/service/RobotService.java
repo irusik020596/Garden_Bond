@@ -41,12 +41,11 @@ public class RobotService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status,
 			   		@DefaultValue("") @QueryParam("status") String state
 			   )
 	   {
-		   return RestDAO.addRobot(user, password, lotId, name, description, type, subdomain, status, state);
+		   return RestDAO.addRobot(user, password, lotId, name, description, type, status, state);
 	   }	
 	   @GET
 	   @Path("/edit")
@@ -58,12 +57,11 @@ public class RobotService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status,
 			   		@DefaultValue("") @QueryParam("status") String state
 			   )
 	   {
-		   return RestDAO.editRobot(user, password, id, name, description, type, subdomain, status, state);
+		   return RestDAO.editRobot(user, password, id, name, description, type, status, state);
 	   }	
 	   @GET
 	   @Path("/delete")
@@ -147,12 +145,11 @@ public class RobotService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status,
 			   		@DefaultValue("") @QueryParam("status") String state
 			   )
 	   {
-		   return RestDAO.addRobot(user, password, lotId, name, description, type, subdomain, status, state);
+		   return RestDAO.addRobot(user, password, lotId, name, description, type, status, state);
 	   }	
 	   @POST
 	   @Path("/edit")
@@ -164,12 +161,11 @@ public class RobotService {
 			   		@DefaultValue("") @QueryParam("name") String name,
 			   		@DefaultValue("") @QueryParam("description") String description,
 			   		@DefaultValue("") @QueryParam("type") String type,
-			   		@DefaultValue("") @QueryParam("subdomain") String subdomain,
 			   		@DefaultValue("") @QueryParam("status") String status,
 			   		@DefaultValue("") @QueryParam("status") String state
 			   )
 	   {
-		   return RestDAO.editRobot(user, password, id, name, description, type, subdomain, status, state);
+		   return RestDAO.editRobot(user, password, id, name, description, type, status, state);
 	   }	
 	   @POST
 	   @Path("/delete")

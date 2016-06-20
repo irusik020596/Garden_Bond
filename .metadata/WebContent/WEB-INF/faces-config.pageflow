@@ -1,31 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14468136457260" configfile="/Plants/WebContent/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="338" y="178" id="pf14468959671633" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" outlinks="pf14468959671634 pf14469128194550 pf14469781246471" inlinks="pf14469781246472 pf14469781246471" path="/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="admin.xhtml" x="554" y="178" id="pf14468959671635" referenceLink="//@navigationRule.6/@navigationCase.3/@toViewId|" outlinks="pf144723638498418" inlinks="pf14468959671634 pf14474346585620 pf14474346585621 pf14474346585622" path="/base.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="registration.xhtml" x="122" y="178" id="pf14469128194551" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14469781246472 pf14469783820103" inlinks="pf14469128194550 pf14469783820103" path="/registration.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="egistration.xhtml" id="pf14472328444370" referenceLink="//@navigationRule.6/@navigationCase.2/@toViewId|" outlinks="pf14472328444371 pf14472328444372 pf14472328444373" inlinks="pf14472328444374 pf14472328444375 pf144723352514017 pf144723638498418" path="/problems.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="sensors.xhtml" id="pf14472328444376" referenceLink="//@navigationRule.6/@navigationCase.0/@toViewId|" outlinks="pf14472328444377 pf14472328444378 pf144723352514017 pf14474346585622" inlinks="pf14472328444371 pf144723284443710 pf144723284443711" path="/sensors.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="rules.xhtml" id="pf144723284443712" referenceLink="//@navigationRule.6/@navigationCase.1/@toViewId|" outlinks="pf144723284443710 pf144723284443713 pf14472328444374 pf14474346585620" inlinks="pf14472328444372 pf14472328444377 pf144723284443714" path="/rules.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="robots.xhtml" id="pf144723284443715" referenceLink="//@navigationRule.6/@fromViewId|" outlinks="pf144723284443711 pf144723284443714 pf14472328444375 pf14474346585621" inlinks="pf14472328444373 pf14472328444378 pf144723284443713" path="/robots.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="554" y="178" id="pf14468959671633" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" outlinks="pf14468959671634 pf14469128194550 pf14469781246471" inlinks="pf14469781246472 pf14469781246471" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="admin.xhtml" x="770" y="583" id="pf14468959671635" referenceLink="//@navigationRule.5/@navigationCase.2/@toViewId|" outlinks="pf14652921681500 pf14652921681501" inlinks="pf14468959671634 pf14474346585620 pf14474346585621 pf14474346585622" path="/base.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="registration.xhtml" x="770" y="178" id="pf14469128194551" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf14469781246472 pf14469783820103" inlinks="pf14469128194550 pf14469783820103" path="/registration.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="egistration.xhtml" x="122" y="191" id="pf14472328444370" referenceLink="//@navigationRule.6/@navigationCase.2/@toViewId|" path="/problems.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="sensors.xhtml" x="554" y="583" id="pf14472328444376" referenceLink="//@navigationRule.5/@navigationCase.0/@toViewId|" outlinks="pf14472328444377 pf14472328444378 pf14474346585622" inlinks="pf144723284443710 pf144723284443711 pf14652921681500" path="/sensors.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="rules.xhtml" x="338" y="381" id="pf144723284443712" referenceLink="//@navigationRule.5/@navigationCase.1/@toViewId|" outlinks="pf144723284443710 pf144723284443713 pf14474346585620" inlinks="pf14472328444377 pf144723284443714" path="/rules.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="robots.xhtml" x="122" y="588" id="pf144723284443715" referenceLink="//@navigationRule.5/@fromViewId|" outlinks="pf144723284443711 pf144723284443714 pf14474346585621" inlinks="pf14472328444378 pf144723284443713" path="/robots.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="statistics.xhtml" id="pf14652921681502" referenceLink="//@navigationRule.2/@navigationCase.1/@toViewId|" inlinks="pf14652921681501" path="/statistics.xhtml"/>
   <links id="pf14468959671634" target="pf14468959671635" source="pf14468959671633" outcome="admin"/>
   <links id="pf14469128194550" target="pf14469128194551" source="pf14468959671633" outcome="registration"/>
   <links id="pf14469781246472" target="pf14468959671633" source="pf14469128194551" outcome="login"/>
-  <links id="pf14469781246471" target="pf14468959671633" source="pf14468959671633" outcome="login"/>
-  <links id="pf14469783820103" target="pf14469128194551" source="pf14469128194551" outcome="registration"/>
-  <links id="pf14472328444371" target="pf14472328444376" source="pf14472328444370" outcome="sensors"/>
-  <links id="pf14472328444372" target="pf144723284443712" source="pf14472328444370" outcome="rules"/>
-  <links id="pf14472328444373" target="pf144723284443715" source="pf14472328444370" outcome="robots"/>
   <links id="pf14472328444377" target="pf144723284443712" source="pf14472328444376" outcome="rules"/>
   <links id="pf14472328444378" target="pf144723284443715" source="pf14472328444376" outcome="robots"/>
   <links id="pf144723284443710" target="pf14472328444376" source="pf144723284443712" outcome="sensors"/>
   <links id="pf144723284443713" target="pf144723284443715" source="pf144723284443712" outcome="robots"/>
-  <links id="pf14472328444374" target="pf14472328444370" source="pf144723284443712" outcome="problems"/>
   <links id="pf144723284443711" target="pf14472328444376" source="pf144723284443715" outcome="sensors"/>
   <links id="pf144723284443714" target="pf144723284443712" source="pf144723284443715" outcome="rules"/>
-  <links id="pf14472328444375" target="pf14472328444370" source="pf144723284443715" outcome="problems"/>
-  <links id="pf144723352514017" target="pf14472328444370" source="pf14472328444376" outcome="problems"/>
-  <links id="pf144723638498418" target="pf14472328444370" source="pf14468959671635" outcome="sensors"/>
   <links id="pf14474346585620" target="pf14468959671635" source="pf144723284443712" outcome="lots"/>
   <links id="pf14474346585621" target="pf14468959671635" source="pf144723284443715" outcome="lots"/>
   <links id="pf14474346585622" target="pf14468959671635" source="pf14472328444376" outcome="lots"/>
+  <links id="pf14652921681500" target="pf14472328444376" source="pf14468959671635" outcome="sensors"/>
+  <links id="pf14469781246471" target="pf14468959671633" source="pf14468959671633" outcome="login">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf14469783820103" target="pf14469128194551" source="pf14469128194551" outcome="registration">
+    <bendPoints d1Height="-36" d2Height="-36"/>
+    <bendPoints d1Width="-64" d1Height="-36" d2Width="-64" d2Height="-36"/>
+    <bendPoints d1Width="-64" d2Width="-64"/>
+  </links>
+  <links id="pf14652921681501" target="pf14652921681502" source="pf14468959671635" outcome="statistics"/>
 </pageflow:Pageflow>

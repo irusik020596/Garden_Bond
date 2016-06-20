@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.irina.beans.Item;
+import org.irina.beans.Problem;
+import org.irina.beans.Statistic;
 import org.irina.util.DataConnect;
 
 public class LotDAO {
@@ -19,7 +21,8 @@ public class LotDAO {
 
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select id, description, domain, broker_url, broker_login, broker_password from Lots where owner = ?");
+			ps = con.prepareStatement(
+					"Select id, description, domain, broker_url, broker_login, broker_password from Lots where owner = ?");
 			ps.setString(1, user);
 
 			ResultSet rs = ps.executeQuery();
@@ -43,6 +46,7 @@ public class LotDAO {
 		}
 		return list;
 	}
+
 	public static List<Item> getAllLots() {
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -50,7 +54,8 @@ public class LotDAO {
 
 		try {
 			con = DataConnect.getConnection();
-			ps = con.prepareStatement("Select id, description, domain, broker_url, broker_login, broker_password from Lots");
+			ps = con.prepareStatement(
+					"Select id, description, domain, broker_url, broker_login, broker_password from Lots");
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -150,4 +155,34 @@ public class LotDAO {
 		return null;
 	}
 
+	public static List<Statistic> getStatistics() {
+		Connection con = null;
+		PreparedStatement ps = null;
+		List<Statistic> statistics = new ArrayList<Statistic>();
+
+		try {
+			con = DataConnect.getConnection();
+			ps = con.prepareStatement(
+					"Select L.description, S.name, P.sensorid, count(*) as C from lots L, sensors S, problems P, rules R where P.ruleid = R.id and L.id = R.lotid and S.id = P.sensorid group by L.description, S.name, P.sensorid order by L.description, S.name");
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				String description = rs.getString(1);
+				String sensorName = rs.getString(2);
+				String sensorId = rs.getString(3);
+				String problemsCount = rs.getString(4);
+				Statistic s = new Statistic(description, sensorId, sensorName, Integer.parseInt(problemsCount));
+				statistics.add(s);
+			}
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+
+		} catch (SQLException ex) {
+			System.out.println("Lot error getStatistics-->" + ex.getMessage());
+		}
+		return statistics;
+	}
+	
 }

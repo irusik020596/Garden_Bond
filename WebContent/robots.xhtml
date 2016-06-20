@@ -7,7 +7,7 @@
 <h:head>
 	<title>List of robots</title>
 	<meta name="viewport" content="width=device-width" />
-	<link rel="stylesheet" type="text/css" href="css/all-dist.css" />
+	<link rel="stylesheet" type="text/css" href="css/all.css" />
 </h:head>
 <h:body>
 	<div class="wrapper wrapper--base">
@@ -32,7 +32,7 @@
 							<li><img src="images/logout.png" alt="" class="menu__icon" />
 								<h:commandLink action="#{login.logout}" value="Logout"></h:commandLink></li>
 							<li><img src="images/plot.png" alt="" class="menu__icon" />
-								<h:commandLink action="#{lots.lots}" value="Plots"></h:commandLink></li>
+								<h:commandLink action="#{lots.lots}" value="Lots"></h:commandLink></li>
 							<li><img src="images/sensor.png" alt="" class="menu__icon" />
 								<h:commandLink action="#{lots.sensors}" value="Sensors"></h:commandLink></li>
 							<li><img src="images/rules.png" alt="" class="menu__icon" />
@@ -107,10 +107,10 @@
 										<f:selectItems value="#{robots.robotStateValue}" />
 									</h:selectOneListbox>
 								</p>
-								<p class="form__group">
+								<p class="form__group ">
 									<label for="rules">Activate rules:</label>
 									<h:selectManyCheckbox id="rules" value="#{robots.ruleData}"
-										class="form__control">
+										class="checkbox_table ">
 										<f:selectItems value="#{robots.ruleValues}" />
 									</h:selectManyCheckbox>
 								</p>

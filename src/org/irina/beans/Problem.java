@@ -1,30 +1,35 @@
 package org.irina.beans;
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 //import org.irina.model.User;
 
 @XmlRootElement(name="problem")
-public class Problem {
+public class Problem implements Serializable{
 	
 	private String id;
 	private String lot;
 	private String rule;
 	private String notes;
 	private String attime;
+	private String sensorId;
 	public Problem()
 	{
-		this(null, null, null, null, null);
+		this(null, null, null, null, null, null);
 	}
-	public Problem(String id, String lot, String rule, String attime, String notes) {
+	public Problem(String id, String lot, String rule, String attime, String notes, String sensorId) {
 		// TODO Auto-generated constructor stub
 		this.id = id;
 		this.lot = lot;
 		this.rule = rule;
 		this.attime = attime;
 		this.notes = notes;
+		this.sensorId = sensorId;
 	}
-    @XmlElement(name="id", required=true)
+    
+	@XmlElement(name="id", required=true)
 	public String getId()
 	{
 		return id;
@@ -68,6 +73,13 @@ public class Problem {
     public void setNotes(String notes)
 	{
 		this.notes = notes;
+	}
+    @XmlElement(name="sensorId", required=true)
+    public String getSensorId() {
+		return sensorId;
+	}
+	public void setSensorId(String sensorId) {
+		this.sensorId = sensorId;
 	}
     @Override
 	public String toString() {

@@ -1,4 +1,4 @@
-package org.irina.filter;
+package org.irina.util;
 
 import java.rmi.server.UID;
 import java.sql.Connection;
@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
@@ -24,12 +25,18 @@ import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.irina.beans.Condition;
 import org.irina.beans.Item;
 import org.irina.beans.Problem;
+import org.irina.beans.SessionBean;
 import org.irina.dao.ConditionDAO;
+import org.irina.dao.LoginDAO;
+import org.irina.dao.ProblemDAO;
 import org.irina.dao.SensorDAO;
 import org.irina.dao.SubscriberDAO;
-import org.irina.util.DataConnect;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import javax.mail.*;
+import javax.mail.internet.*;
+import javax.servlet.http.HttpSession;
+import javax.activation.*;
 
 public class Subscriber implements MqttCallback {
 
@@ -45,6 +52,7 @@ public class Subscriber implements MqttCallback {
 		this.broker_url = broker_url;
 		this.domain = domain;
 		maps = new ArrayList<Map<String, String>>();
+
 	}
 
 	/**
@@ -83,18 +91,8 @@ public class Subscriber implements MqttCallback {
 	public void messageArrived(String topic, MqttMessage message) throws Exception {
 		try {
 			System.out.println("Topic:" + topic);
-			// System.out.println("Message: " + new
-			// String(message.getPayload()));
 			convert(new String(message.getPayload()));
-			// TODO Auto-generated method stub
-			/*
-			 * System.out.println(
-			 * "-------------------------------------------------");
-			 * 
-			 * System.out.println("| Message: " + new
-			 * String(message.getPayload())); System.out.println(
-			 * "-------------------------------------------------");
-			 */} catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println("subscriber messageArrived: " + e.getMessage());
 		}
 
@@ -110,24 +108,18 @@ public class Subscriber implements MqttCallback {
 				JSONObject infos = jsonarray.getJSONObject(i);
 				map.put("name", infos.getString("name"));
 				map.put("datavalue", infos.getString("datavalue"));
-				// System.out.println("uid:" + getPrimaryKey());
-				// System.out.println("name:" + map.get("name"));
-				// System.out.println("datavalue:" + map.get("datavalue"));
-
 				maps.add(i, map);
 				String sensorId = SubscriberDAO.getSensorId(domain, map.get("name"));
 				System.out.println("Sensorid : " + sensorId);
 				System.out.println("datavalue : " + map.get("datavalue"));
-				List<Problem> listProblems = checkProblems(sensorId, Integer.parseInt(map.get("datavalue")));
-				// for(Problem p:listProblems){
-				// System.out.println(p.toString());
-				// System.out.println("--------------");
-				// }
+				List<String> listSensors = checkProblems(sensorId, Integer.parseInt(map.get("datavalue")));
 				SubscriberDAO.toInfosDatabase(map, domain, sensorId);
+				send(listSensors);
 			}
 		} catch (Exception e) {
 			System.out.println("subscriber convert:" + e.toString());
 		}
+
 	}
 
 	public void runClient() {
@@ -152,55 +144,88 @@ public class Subscriber implements MqttCallback {
 		}
 	}
 
-	private List<Problem> checkProblems(String sensorId, int dataValue) {
+	private List<String> checkProblems(String sensorId, int dataValue) {
 		List<Condition> list = ConditionDAO.getConditionsBySensor(sensorId);
-		List<Problem> problems = new ArrayList<Problem>();
+		List<String> sensorsId = new ArrayList<String>();
 		try {
 			for (Condition c : list) {
 				if (c.getOperationText().equals("great")) {
 					if (dataValue < Double.parseDouble(c.getLimit())) {
-						Problem p = makeProblem(c, sensorId,dataValue);
-						problems.add(p);
+						String s = makeProblem(c, sensorId, dataValue);
+						sensorsId.add(s);
 					}
 				}
 				if (c.getOperationText().equals("less")) {
 					if (dataValue > Double.parseDouble(c.getLimit())) {
-						// System.out.println("make");
-						Problem p = makeProblem(c, sensorId,dataValue);
-						problems.add(p);
+						String s = makeProblem(c, sensorId, dataValue);
+						sensorsId.add(s);
 					}
 				}
 			}
 		} catch (Exception e) {
 			System.out.println("checkProblems: " + e.getMessage());
 		}
-		return problems;
+		return sensorsId;
 	}
 
-	private Problem makeProblem(Condition c, String sensorId, int dataValue) {
-
+	private String makeProblem(Condition c, String sensorId, int dataValue) {
 		String id = SubscriberDAO.getPrimaryKey();
-		String rule = ConditionDAO.getRuleByCoditionId(c.getId());
-		String lot = ConditionDAO.getLotByCoditionId(c.getId());
+		String ruleId = ConditionDAO.getRuleByCoditionId(c.getId());
 		String notes = SensorDAO.getSensorName(c.getSensorId()) + "=" + dataValue + " not " + c.getOperationText() + " "
 				+ c.getLimit();
-		System.out.println("-----------------");
-		System.out.println("id " + id);
-		System.out.println("rule " + rule);
-		System.out.println("lot " + lot);
-		System.out.println("notes " + notes);
-		System.out.println("-----------------");
-		Problem p = new Problem(id, lot, rule, notes, new Date().toString());
-		return p;
+		String sensorsId = ProblemDAO.newProblem(id, ruleId, notes, sensorId);
+		return sensorsId;
 	}
 
-	/*
-	 * private String modelValue(String op, String limit) { String s = "";
-	 * double d = Double.parseDouble(limit); if (op.equals("<")) s += (d + 1);
-	 * else s += (d - 1); return s; }
-	 * 
-	 * public String getClientID() { return clientID; }
-	 */
+	public void sendEmail(String email, String messageText) {
+		String from = "irusik020596@gmail.com";
+		// final String username = "irusik020596";//change accordingly
+		// final String password = "dctrjpks";//change accordingly
+		String host = "localhost";
+
+		Properties props = new Properties();
+		// props.put("mail.smtp.auth", "true");
+		// props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", "2525");
+		// Session session = Session.getInstance(props, new
+		// GMailAuthenticator(username, password));
+		Session session = Session.getDefaultInstance(props);
+		try {
+			MimeMessage message = new MimeMessage(session);
+			message.setFrom(new InternetAddress(from));
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
+			message.setSubject("This is the Subject Line!");
+			message.setText(messageText);
+			Transport.send(message);
+			System.out.println("Sent message successfully....");
+		} catch (MessagingException mex) {
+			mex.printStackTrace();
+		}
+	}
+
+	public void send(List<String> listSensors) {
+		try {
+			// for (String sensor : listSensors) {
+
+			System.out.println(listSensors.get(0));
+			List<String> values = LoginDAO.getUserEmail(listSensors.get(0));
+			if (values.size() < 2)
+				return;
+			String email = values.get(1);
+			System.out.println("email:" + email);
+			List<Problem> problems = ProblemDAO.getActiveProblems(values.get(0));
+			String text = "Garden Bond notification:\"\n\n\"";
+			for (Problem p : problems) {
+				text += p.toString() + "\n";
+				// System.out.println("sendEmail:" + text);
+			}
+			sendEmail(email, text);
+			// }
+		} catch (Exception e) {
+			System.out.println("send " + e.toString());
+		}
+	}
 
 	public void setClientID(String clientID) {
 		this.clientID = clientID;

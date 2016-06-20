@@ -1,12 +1,14 @@
 package org.irina.beans;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.irina.util.HandBook;
 
 @XmlRootElement(name="rule")
-public class Rule {
+public class Rule implements Serializable {
 	private String id;
 //	private String lotId;
 	private String name;

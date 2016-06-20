@@ -14,9 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.irina.beans.Item;
 import org.irina.beans.Problem;
 import org.irina.beans.SessionBean;
+import org.irina.beans.Statistic;
 import org.irina.dao.LotDAO;
 import org.irina.dao.ProblemDAO;
-import org.irina.filter.Subscriber;
+import org.irina.util.Subscriber;
 
 
 @ManagedBean
@@ -30,19 +31,13 @@ public class Lots implements Serializable {
     private boolean edit;
     private String user;
     private List<Problem> listProblems;
-
+    
     @PostConstruct
     public void init() {
-        // list = dao.list();
-        // Actually, you should retrieve the list from DAO. This is just for demo.
 		HttpSession session = SessionBean.getSession();
 		user = (String)session.getAttribute("username");
         list = LotDAO.getLots(user);
         listProblems = ProblemDAO.getActiveProblems(user);
-        /*new ArrayList<Item>();*/
-        /*list.add(new Item(getKey(), u));*/
-        //list.add(new Item(2, "item2"));
-        //list.add(new Item(3, "item3"));
     }
     
     public void add() {
@@ -115,6 +110,7 @@ public class Lots implements Serializable {
     {
     	return "lots";
     }
+   
     public String gotolot(Item item)
     {
 		HttpSession session = SessionBean.getSession();
@@ -126,7 +122,5 @@ public class Lots implements Serializable {
 		session.setAttribute("lotbroker_password", item.getBroker_password());
 		return sensors();
     }
-
-    // Other getters/setters are actually unnecessary. Feel free to add them though.
 
 }
